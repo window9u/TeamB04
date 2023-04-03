@@ -1,6 +1,6 @@
-
+//주혁
 public class Knight extends ChessPiece {
-    // Rook을 초기화 한 방식으로 초기화
+    // Rook과 같은 방법 생성자 생성 및 canMove() 메소드 오버라이딩
     int score;
 
     public Knight(boolean isWhite, ChessBoard board) {
@@ -13,28 +13,7 @@ public class Knight extends ChessPiece {
     @Override
     public String canMove(int fromX, int fromY, int toX, int toY) {
         String str = "";
-        if (Math.abs(fromX - toX) != 1 && Math.abs(fromY - toY) != 2 && Math.abs(fromX - toX) != 2
-                && Math.abs(fromY - toY) != 1) {
-            str = "wrong";
-        } else if (Math.abs(fromX - toX) == 1 && Math.abs(fromY - toY) == 2) {
-            if (ChessBoard.board[toX][toY] == null) {
-                str = "move";
-            } else if (ChessBoard.board[toX][toY].isWhite != ChessBoard.board[fromX][fromY].isWhite) {
-                str = "eat";
-            } else {
-                str = "wrong";
-            }
-        } else if (Math.abs(fromX - toX) == 2 && Math.abs(fromY - toY) == 1) {
-            if (ChessBoard.board[toX][toY] == null) {
-                str = "move";
-            } else if (ChessBoard.board[toX][toY].isWhite != ChessBoard.board[fromX][fromY].isWhite) {
-                str = "eat";
-            } else {
-                str = "wrong";
-            }
-        } else {
-            str = "wrong";
-        }
+    
         return str;
     }
 
@@ -47,4 +26,7 @@ public class Knight extends ChessPiece {
             return "n";
         }
     }
+    
+
+  
 }

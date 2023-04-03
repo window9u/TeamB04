@@ -9,11 +9,11 @@ public class ChessBoard {
         board=new ChessPiece[9][9];//9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
         //흰색 룩 초기화, 이런식으로 16개의 말 모두 초기화
         //폰같이 많은 기물은 for문 또한 사용 가능
-        board[1][1]=new Rook(true, this);
-        board[1][8]=new Rook(false, this);
 
         // Create the graphical representation of the chess Chessboard.
     }
+
+    //치수
     public boolean Move(int i, int i1, int i2, int i3) {
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
         //i,i1 null로 처리하기
@@ -23,6 +23,7 @@ public class ChessBoard {
         return false;
     }
 
+    //주혁
     public void printBoard() {
         //첫 행 옆줄에 점수 표기.
         //다음과 같은 형식으로 출력.

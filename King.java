@@ -1,4 +1,4 @@
-
+//재하
 public class King extends ChessPiece{
     //Rook과 같은 방식으로 점수 초기화 및 canMove() 메소드 구현
     int score;
@@ -18,20 +18,7 @@ public class King extends ChessPiece{
         // 움직일 수 없는 경우, "wrong" 리턴
         // 이동하려는 위치가 체스판을 벗어나는 경우는 입력값이 잘못된 경우이므로, "wrong" 리턴
         // 이동하려는 위치가 같은 위치인 경우는 입력값이 잘못된 경우이므로, "wrong" 리턴
-        if((Math.abs(fromX-toX)==1&&fromY==toY)||(Math.abs(fromY-toY)==1&&fromX==toX)||(Math.abs(fromX-toX)==1&&Math.abs(fromY-toY)==1)) {
-            if(ChessBoard.board[toX][toY]==null) {//이동 경로에 장애물이 없으면 이동
-                str="move";
-            }
-            else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[fromX][fromY].isWhite) {//이동 경로에 장애물이 있고 적인 기물이 있으면 먹기
-                str="eat";
-            }
-            else {//이동 경로에 장애물이 있고 아군 기물이 있으면 이동 불가
-                str="wrong";
-            }
-        }
-        else {//이동 경로에 장애물이 있고 아군 기물이 있으면 이동 불가
-            str="wrong";
-        }
+        
         return str;
     }
     //toString() 메소드 구현

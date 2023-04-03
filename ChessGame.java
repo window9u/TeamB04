@@ -5,10 +5,11 @@ public class ChessGame {
     boolean isWhiteTurn;
     int WhiteScore;
     int BlackScore;
-    int turn;// 총 턴
+    int turn=50;// 총 턴
     int fromX, fromY, toX, toY;
     Scanner scan = new Scanner(System.in);
 
+    //찬규
     public ChessGame() {
         // Initialize the chess Chessboard and set up the game.
         // 체스 판 및
@@ -24,6 +25,7 @@ public class ChessGame {
             printMessage(isWhiteTurn);
             // 사용자 입력 받기
             inputFrom(isWhiteTurn);
+
             flag = inputTo(isWhiteTurn);
             if (flag == 0) {// 기물을 다시 선택하는 경우
                 continue;
@@ -37,29 +39,22 @@ public class ChessGame {
         }
         printEnding();
     }
-
+    //경식
     private void printMessage(boolean isWhiteTurn) {
         // 이전에 했던 움직임 출력ex) White move Night to A7
         // 어려우면 안해도 될 듯.
 
     }
-
+    //재하
     public int pieceColor(int x, int y) {
         // 해당 좌표의 기물의 색이 무엇인지 출력.
         // 흑이면 -1, 백이면 +1, 비었으면 0 리턴
         // piece를 사용하여 판별
 
         ChessPiece piece = this.Chessboard.board[x][y];
-        if (piece == null) {
-            return 0;
-        }
-        if (piece.isWhite) {
-            return 1;
-        } else {
-            return -1;
-        }
+        return 1;
     }
-
+    //재하
     private void inputFrom(boolean isWhiteTurn) {
         // 선택할 말의 위치를 선택하시오: "A8"에서 문자열 추출 후 toX:1, toY:8 대입
         // 만일 잘못된 위치를 선택 시 오류 메세지(위치가 잘못되었습니다. 다시 입력하세요.) 출력 후 재입력 받음
@@ -76,37 +71,9 @@ public class ChessGame {
             // 예외처리: 비어있는 위치 입력 시 오류 메세지 출력 후 재입력 받음
             // 예외처리: 흑의 차례에 백의 말을 선택한 경우 오류 메세지 출력 후 재입력 받음
             // 예외처리: 백의 차례에 흑의 말을 선택한 경우 오류 메세지 출력 후 재입력 받음
-            if (str.equals("quit")) {// 긴급종료
-                System.out.println("게임을 종료합니다.");
-                break;
-            } else if (str.equals("back")) {// 기물을 다시 선택하는 경우
-                break;
-            } else if (str.length() != 2) {// 재입력
-                System.out.println("위치가 잘못되었습니다. 다시 입력하세요.");
-                continue;
-            } else if (str.charAt(0) < 'A' || str.charAt(0) > 'H') {// 재입력
-                System.out.println("위치가 잘못되었습니다. 다시 입력하세요.");
-                continue;
-            } else if (str.charAt(1) < '1' || str.charAt(1) > '8') {// 재입력
-                System.out.println("위치가 잘못되었습니다. 다시 입력하세요.");
-                continue;
-            } else
-
-            if (pieceColor(fromX, fromY) == 0) {// 비어있는 경우
-                System.out.println("위치가 잘못되었습니다. 다시 입력하세요.");
-                continue;
-            } else if (pieceColor(fromX, fromY) == 1 && isWhiteTurn == false) {// 흑의 차례에 백의 말을 선택한 경우
-                System.out.println("위치가 잘못되었습니다. 다시 입력하세요.");
-                continue;
-            } else if (pieceColor(fromX, fromY) == -1 && isWhiteTurn == true) {// 백의 차례에 흑의 말을 선택한 경우
-                System.out.println("위치가 잘못되었습니다. 다시 입력하세요.");
-                continue;
-            } else {
-                break;
-            }
-        }
+           
     }
-
+    //찬규
     private int inputTo(boolean isWhiteTurn) {
         // 선택할 말의 위치를 선택하시오: "A8"에서 문자열 추출 후 toX:1, toY:8 대입
         // 만일 잘못된 위치를 선택 시 오류 메세지 출력 후 재입력 받음
@@ -130,92 +97,30 @@ public class ChessGame {
 
     }
 
+    //치수
     private void printEnding() {
         // ex) White Win!!
-        if (isKingdie()) {
-            // 왕이 죽어서 끝난 경우
-            if (isWhiteTurn) {
-                // 흑이 이긴 경우
-                System.out.println("Black Win!!");
-            } else {
-                // 백이 이긴 경우
-                System.out.println("White Win!!");
-            }
-
-        } else if (isStalemate()) {
-            // 무승부인 경우 WhiteScore 비교해서 출력
-            if (WhiteScore > BlackScore) {
-                System.out.println("White Win!!");
-            } else if (WhiteScore < BlackScore) {
-                System.out.println("Black Win!!");
-            } else {
-                System.out.println("Draw!!");
-            }
-
-        } else {
-            // 긴급종료인 경우
-            System.out.println("Emergency Exit!!");
-        }
-
+        
     }
-
+    //주혁
     private void initBoard() {
         // 체스 기물 초기화 초기화 ex)Chessboard.board[1][1] = new Rook(false, this.Chessboard);
         // 0,0은 사용하지 않음
-        Chessboard = new ChessBoard(this);
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                this.Chessboard.board[i][j] = null;
-            }
-        }
-        // 흑
-        this.Chessboard.board[1][1] = new Rook(false, this.Chessboard);
-        this.Chessboard.board[1][2] = new Knight(false, this.Chessboard);
-        this.Chessboard.board[1][3] = new Bishop(false, this.Chessboard);
-        this.Chessboard.board[1][4] = new Queen(false, this.Chessboard);
-        this.Chessboard.board[1][5] = new King(false, this.Chessboard);
-        this.Chessboard.board[1][6] = new Bishop(false, this.Chessboard);
-        this.Chessboard.board[1][7] = new Knight(false, this.Chessboard);
-        this.Chessboard.board[1][8] = new Rook(false, this.Chessboard);
-        for (int i = 1; i < 9; i++) {
-            this.Chessboard.board[2][i] = new Pawn(false, this.Chessboard);
-        }
-        // 백
-        this.Chessboard.board[8][1] = new Rook(true, this.Chessboard);
-        this.Chessboard.board[8][2] = new Knight(true, this.Chessboard);
-        this.Chessboard.board[8][3] = new Bishop(true, this.Chessboard);
-        this.Chessboard.board[8][4] = new Queen(true, this.Chessboard);
-        this.Chessboard.board[8][5] = new King(true, this.Chessboard);
-        this.Chessboard.board[8][6] = new Bishop(true, this.Chessboard);
-        this.Chessboard.board[8][7] = new Knight(true, this.Chessboard);
-        this.Chessboard.board[8][8] = new Rook(true, this.Chessboard);
-        for (int i = 1; i < 9; i++) {
-            this.Chessboard.board[7][i] = new Pawn(true, this.Chessboard);
-        }
 
     }
-
+    //경식
     public boolean isKingdie() {
         // 킹이 죽었는지 확인
         // 킹이 죽었으면 true, 아니면 false
         // 체스판에서 흑과 백의 킹이 죽었는지 확인
-        for (int i = 1; i < 9; i++) {
-            for (int j = 1; j < 9; j++) {
-                if (this.Chessboard.board[i][j] instanceof King) {
-                    return false;
-                }
-            }
-        }
+        
         return true;
     }
-
+    //치수
     public boolean isStalemate() {
         // Determine whether the game is in stalemate.
         // 턴수가 끝났는지 검사
-        if (turn == 50) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
 }
