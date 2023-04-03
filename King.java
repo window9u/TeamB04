@@ -7,7 +7,7 @@ public class King extends ChessPiece{
         //점수 초기화
         int score=100;
     }
-//ㄴㅐ가 해야될 기물 Kingㅇㅇ
+//ㄴㅐ가 해야될 기물 Kingㅇㅍ
     @Override
     public String canMove(int fromX, int fromY, int toX, int toY) {
         String str="";
