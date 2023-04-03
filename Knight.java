@@ -13,7 +13,7 @@ public class Knight extends ChessPiece {
     @Override
     public String canMove(int fromX, int fromY, int toX, int toY) {
         String str = "";
-    // 퀸 다 짜ㄴ
+    // 퀸 다 짜음
         return str;
     }
 
