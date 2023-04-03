@@ -1,4 +1,4 @@
-//주혁
+//주혁 나이트 다 짰음
 public class Knight extends ChessPiece {
     // Rook과 같은 방법 생성자 생성 및 canMove() 메소드 오버라이딩
     int score;
