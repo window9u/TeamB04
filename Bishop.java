@@ -10,7 +10,7 @@ public class Bishop extends ChessPiece{
     @Override
     public String canMove(int fromX, int fromY, int toX, int toY) {
         String str="";
-        
+        //코드 다 짰음
         return str;
     }
     
