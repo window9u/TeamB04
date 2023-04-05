@@ -44,26 +44,26 @@ public class Pawn extends ChessPiece{
                             str= "There is a piece in the way";
                         }
                     }else {
-                        str= "It's not first move";
+                        str= "There is a piece in the way";
                     }
                 }else {//첫번째 이동이 아니다.(입력오류)
-                    str= "wrong";
+                    str= "It's not first move";
                 }
             }else if(fromY+1==toY&&(toX-1==fromX||toX+1==fromX)){//대각선 이동의 경우
                 if(countpart==null){
                     //상대방이 없는 경우
-                    str= "wrong";
+                    str= "You cannot move diagonally without eating";
                 }else if(countpart.isWhite==this.isWhite){
                     //상대방이 있는 경우
                     firstMove=false;
                     str= "eat";
                 }else{
                     //같은 색의 기물이 있는 경우
-                    str= "wrong";
+                    str= "You can't move to the same color";
                 }
                 //잘못된 이동
             }else {//전진도 대각선 이동도 아닌, 잘못된 이동
-                str= "wrong";
+                str= "You can't move like that";
             }
         }else {
             //흑의 경우
@@ -74,10 +74,10 @@ public class Pawn extends ChessPiece{
                     str= "move";
                 }else if(countpart.isWhite==this.isWhite){
                     //상대방이 있는 경우
-                    str= "wrong";
+                    str= "There is a piece in the way";
                 }else{
                     //같은 색의 기물이 있는 경우
-                    str= "wrong";
+                    str= "You can't move to the same color";
                 }
             }else if(fromY-2==toY&&toX==fromX){//첫 이동(두칸 이동)
                 if(firstMove){//첫번째 이동인 경우
@@ -88,29 +88,29 @@ public class Pawn extends ChessPiece{
                             str= "move";
                         }else if(countpart.isWhite==this.isWhite){//비정상
                             //상대방이 있는 경우
-                            str= "wrong";
+                            str= "There is a piece in the way";
                         }else {//같은편 말이 있는 경우
-                            str= "wrong";
+                            str= "You can't move to the same color";
                         }
                     }
                 }else {//첫번째 이동이 아니다.(입력오류)
-                    str= "wrong";
+                    str= "It's not first move";
                 }
             }else if(fromY-1==toY&&(toX-1==fromX||toX+1==fromX)){//대각선 이동의 경우
                 if(countpart==null){
                     //상대방이 없는 경우
-                    str= "wrong";
+                    str= "You cannot move diagonally without eating";
                 }else if(countpart.isWhite==this.isWhite){
                     //상대방이 있는 경우
                     firstMove=false;
                     str= "eat";
                 }else{
                     //같은 색의 기물이 있는 경우
-                    str= "wrong";
+                    str= "You can't move to the same color";
                 }
                 //잘못된 이동
             }else {//잘못된 이동
-                str= "wrong";
+                str= "You can't move like that";
             }
         }
         return str;
