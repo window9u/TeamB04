@@ -75,28 +75,28 @@ public class ChessBoard {
             System.out.print(8 - i + " ");
             for (int j = 1; j < board[i].length; j++) {
                 System.out.print("| ");
-                if (board[i][j] instanceof Pawn) {
-                    if (board[i][j].isWhite) System.out.print("P");
+                if (board[j][i] instanceof Pawn) {
+                    if (board[j][i].isWhite) System.out.print("P");
                     else System.out.print("p");
                 }
-                else if (board[i][j] instanceof Knight) {
-                    if (board[i][j].isWhite) System.out.print("N");
+                else if (board[j][i] instanceof Knight) {
+                    if (board[j][i].isWhite) System.out.print("N");
                     else System.out.print("n");
                 }
-                else if (board[i][j] instanceof Rook) {
-                    if (board[i][j].isWhite) System.out.print("R");
+                else if (board[j][i] instanceof Rook) {
+                    if (board[j][i].isWhite) System.out.print("R");
                     else System.out.print("r");
                 }
-                else if (board[i][j] instanceof Bishop) {
-                    if (board[i][j].isWhite) System.out.print("B");
+                else if (board[j][i] instanceof Bishop) {
+                    if (board[j][i].isWhite) System.out.print("B");
                     else System.out.print("b");
                 }
-                else if (board[i][j] instanceof Queen) {
-                    if (board[i][j].isWhite) System.out.print("Q");
+                else if (board[j][i] instanceof Queen) {
+                    if (board[j][i].isWhite) System.out.print("Q");
                     else System.out.print("q");
                 }
-                else if (board[i][j] instanceof King) {
-                    if (board[i][j].isWhite) System.out.print("K");
+                else if (board[j][i] instanceof King) {
+                    if (board[j][i].isWhite) System.out.print("K");
                     else System.out.print("k");
                 }
                 else if ((i + j) % 2 != 1) System.out.print("■");
