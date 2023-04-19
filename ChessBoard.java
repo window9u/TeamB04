@@ -14,10 +14,6 @@ public class ChessBoard {
                 board[i][j] = null;
             }
         }
-        //흰색 룩 초기화, 이런식으로 16개의 말 모두 초기화
-        //폰같이 많은 기물은 for문 또한 사용 가능
-
-        // Create the graphical representation of the chess Chessboard.
     }
 
     //치수
@@ -75,30 +71,7 @@ public class ChessBoard {
             System.out.print(8 - i + " ");
             for (int j = 1; j < board[i].length; j++) {
                 System.out.print("| ");
-                if (board[j][i] instanceof Pawn) {
-                    if (board[j][i].isWhite) System.out.print("P");
-                    else System.out.print("p");
-                }
-                else if (board[j][i] instanceof Knight) {
-                    if (board[j][i].isWhite) System.out.print("N");
-                    else System.out.print("n");
-                }
-                else if (board[j][i] instanceof Rook) {
-                    if (board[j][i].isWhite) System.out.print("R");
-                    else System.out.print("r");
-                }
-                else if (board[j][i] instanceof Bishop) {
-                    if (board[j][i].isWhite) System.out.print("B");
-                    else System.out.print("b");
-                }
-                else if (board[j][i] instanceof Queen) {
-                    if (board[j][i].isWhite) System.out.print("Q");
-                    else System.out.print("q");
-                }
-                else if (board[j][i] instanceof King) {
-                    if (board[j][i].isWhite) System.out.print("K");
-                    else System.out.print("k");
-                }
+                if (board[j][i] instanceof ChessPiece) System.out.print(board[j][i].toString());
                 else if ((i + j) % 2 != 1) System.out.print("■");
                 else System.out.print(" ");
                 System.out.print(" ");

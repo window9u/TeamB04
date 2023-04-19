@@ -21,31 +21,31 @@ public class ChessGame {
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
         Chessboard.printBoard();
 
-//        while (!isKingdie() && !isStalemate()) {
-//            // 보드 출력
-//            Chessboard.printBoard();
-//            // 보드 밑에 출력문 출력.
-//            // printMessage 함수에서 전역변수로 변경.
-//            // 기존의 printMessage()의 기능은 Chessboard.Move()에서 문자열 리턴.
-//            //초기값은 Game Start!!
-//            System.out.println(printMessage);
-//            // 사용자 입력 받기
-//            inputFrom(isWhiteTurn);
-//            if (flag == -1) {// 긴급종료
-//                break;
-//            }
-//            inputTo(isWhiteTurn);
-//            if (flag == 0) {// 기물을 다시 선택하는 경우
-//                continue;
-//            } else if (flag == -1) {// 긴급종료
-//                break;
-//            }
-//            // 이동
-//            printMessage =Chessboard.Move(fromX, fromY, toX, toY);
-//            // 턴 바꾸기
-//            isWhiteTurn = !isWhiteTurn;
-//        }
-//        printEnding();
+        while (!isKingdie() && !isStalemate()) {
+            // 보드 출력
+            Chessboard.printBoard();
+            // 보드 밑에 출력문 출력.
+            // printMessage 함수에서 전역변수로 변경.
+            // 기존의 printMessage()의 기능은 Chessboard.Move()에서 문자열 리턴.
+            //초기값은 Game Start!!
+            System.out.println(printMessage);
+            // 사용자 입력 받기
+            inputFrom(isWhiteTurn);
+            if (flag == -1) {// 긴급종료
+                break;
+            }
+            inputTo(isWhiteTurn);
+            if (flag == 0) {// 기물을 다시 선택하는 경우
+                continue;
+            } else if (flag == -1) {// 긴급종료
+                break;
+            }
+            // 이동
+            printMessage =Chessboard.Move(fromX, fromY, toX, toY);
+            // 턴 바꾸기
+            isWhiteTurn = !isWhiteTurn;
+        }
+        printEnding();
     }
 
     // 재하
@@ -161,11 +161,8 @@ public class ChessGame {
                     Chessboard.board[j][i] = new King(true, this.Chessboard);
                     if (i == 0) Chessboard.board[j][i] = new King(false, this.Chessboard);
                 }
-
             }
         }
-
-
     }
 
     // 경식
