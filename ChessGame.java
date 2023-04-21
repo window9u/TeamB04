@@ -59,15 +59,12 @@ public class ChessGame {
 
         ChessPiece piece = this.Chessboard.board[x][y];
         if(piece.isWhite == null) {
-            System.out.println("empty.");
             return 0;
         }
         else if(piece.isWhite == isWhite) {
-            System.out.println("White piece.");
             return 1;
         }
         else if(piece == !isWite) {
-            System.out.println("Black piece.");
             return -1;
         }
 
@@ -96,20 +93,26 @@ public class ChessGame {
                 // 정상입력
                 this.fromX = inputstr.charAt(0) - 'A' + 1;
                 this.toY = inputstr.charAt(1) - '0';
-            }
-            // 흑의 차례일 때 백의 말을 선택한 경우
-            else if(isWhite == !isWhite) {
-                if(pieceColor(fromX, fromY) == 1)
-                    System.out.println("input error");
-                continue;
-            }
-            //백의 차례일 때 흑의 말을 선택한 경우
-            else if(isWhite == isWhite) {
-                if(pieceColor(fromX, fromY) == )
-                    System.out.println("input error");
-                continue;
-            }
-            else {
+                if(isWhiteTurn == true) {
+                    // 백 차례일 때 백의 말을 선택한 경우
+                    if(pieceColor(fromX, fromY) == 1)
+                        break;
+                    // 백 차례일 때 흑의 말을 선택하거나 선택한 좌표가 비어있는 경우
+                    else if(pieceColor(fromX, fromY) == -1 || pieceColor(fromX, fromY) == 0) {
+                        System.out.println("Choose white piece");
+                        continue;
+                    }
+                } else if(isWhiteTurn == false) {
+                    // 흑 차례일 때 백의 말을 선택한 경우
+                    if(pieceColor(fromX, fromY) == -1)
+                        break;
+                    // 흑 차례일 때 백의 말을 선택하거나 선택한 좌표가 비어있는 경우
+                    else if(pieceColor(fromX, fromY) == 1 || pieceColor(fromX, fromY) == 0) {
+                        System.out.println("Choose black piece");
+                        continue;
+                    }
+                }
+            } else {
                 //재입력
                 System.out.println("input error");
                 continue;
