@@ -59,15 +59,15 @@ public class ChessGame {
 
         ChessPiece piece = this.Chessboard.board[x][y];
         if(piece.isWhite == null) {
-            System.out.println("해당 좌표에 기물이 없습니다.");
+            System.out.println("empty.");
             return 0;
         }
         else if(piece.isWhite == isWhite) {
-            System.out.println("해당 기물은 백입니다.");
+            System.out.println("White piece.");
             return 1;
         }
         else if(piece == !isWite) {
-            System.out.println("해당 기물은 흑입니다.");
+            System.out.println("Black piece.");
             return -1;
         }
 
@@ -82,8 +82,7 @@ public class ChessGame {
         // 정상 값을 입력할때까지 이 함수 안에서 다시 입력받을 것
         // pieceColor() 사용하기
 
-        System.out.print("영어로 쓰기 :");
-
+        System.out.print("Choose piece:");
         while (true) {
 
             //  fromX, fromY 입력받기
@@ -97,6 +96,18 @@ public class ChessGame {
                 // 정상입력
                 this.fromX = inputstr.charAt(0) - 'A' + 1;
                 this.toY = inputstr.charAt(1) - '0';
+            }
+            // 흑의 차례일 때 백의 말을 선택한 경우
+            else if(isWhite == !isWhite) {
+                if(pieceColor(fromX, fromY) == 1)
+                    System.out.println("input error");
+                continue;
+            }
+            //백의 차례일 때 흑의 말을 선택한 경우
+            else if(isWhite == isWhite) {
+                if(pieceColor(fromX, fromY) == )
+                    System.out.println("input error");
+                continue;
             }
             else {
                 //재입력
