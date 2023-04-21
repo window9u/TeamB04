@@ -251,11 +251,14 @@ public class ChessGame {
     }
 
     // 치수
-    public boolean isTurnsleft() {
-        // Determine whether the game is in stalemate.
-        
-        // 턴수가 끝났는지 검사
-        return true;
+    public boolean isTurnsleft() { //남은 턴수 계산, 0이되면 true 반환
+        if(turn>0){
+            turn--;
+            return false;
+        }
+        else{
+            return true;
+        }  
     }
 
 }

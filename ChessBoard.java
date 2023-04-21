@@ -17,13 +17,54 @@ public class ChessBoard {
 
     //치수
     public String Move(int i, int i1, int i2, int i3) {
+        String str="";
+        ChessPiece piece1=board[i][i1];
+        ChessPiece piece2=board[i2][i3];
+        ChessPiece tmp=null;
+        if(piece1.isWhite()){
+            //White 말 이동하는 경우
+            if(piece2!=null){
+                //이동하려는 위치에 상대방 말이 있는 경우
+                WhiteScore+=piece2.Score;
+                str="White move "+piece1.toString()+" to "+board[i2][i3]; //리턴 값은 "White(Black) move Knight to A7" 이런식으로. Knight와 A7 어떻게..?
+                tmp=piece2; 
+                piece2=piece1;
+                piece1=tmp; 
+            }
+            else{
+                //빈 위치로 이동하는 경우
+                str="White move "+piece1.toString()+" to "+board[i2][i3];
+                tmp=piece2; 
+                piece2=piece1;
+                piece1=tmp;
+            }
+        }
+        else{
+            //Black 말 이동하는 경우
+            if(piece2!=null){
+                //이동하려는 위치에 상대방 말이 있는 경우
+                BlackScore+=piece2.Score;
+                str="Black move "+piece1.toString()+" to "+board[i2][i3]; //리턴 값은 "White(Black) move Knight to A7" 이런식으로. Knight와 A7 어떻게..?
+                tmp=piece2; 
+                piece2=piece1;
+                piece1=tmp; 
+            }
+            else{
+                //빈 위치로 이동하는 경우
+                str="Black move "+piece1.toString()+" to "+board[i2][i3];
+                tmp=piece2; 
+                piece2=piece1;
+                piece1=tmp;
+            }
+        }
+        
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
+        
         //i,i1 null로 처리하기
         //case1. 빈 공간으로 이동한 경우board(i2,i3)이 null인 경우
         //case2. 상대방 말이 있는 경우 점수를 더해주는 과정 거침
         //리턴 값은 "White(Black) move Knight to A7" 이런식으로.
-        String str="";
-        ChessPiece piece=board[i][i1];
+      
         return str;
     }
 
