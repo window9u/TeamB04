@@ -119,6 +119,7 @@ public class ChessGame {
     // 치수
     private void printEnding() {
         // ex) White Win!!
+     
 
     }
 
@@ -178,6 +179,7 @@ public class ChessGame {
     // 치수
     public boolean isStalemate() {
         // Determine whether the game is in stalemate.
+        
         // 턴수가 끝났는지 검사
         return true;
     }
