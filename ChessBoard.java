@@ -4,7 +4,6 @@ public class ChessBoard {
     ChessPiece[][] board = new ChessPiece[9][9];
     int WhiteScore;
     int BlackScore;
-    int TurnCount = 50;
 
     public ChessBoard(ChessGame game) {
         this.game = game;
@@ -80,7 +79,7 @@ public class ChessBoard {
             System.out.print(8 - i + " ");
             if (i == 1) System.out.print(" White score: " + WhiteScore);
             if (i == 2) System.out.print(" Black score: " + BlackScore);
-            if (i == 8) System.out.print(" Turn: " + TurnCount);
+            if (i == 8) System.out.print(" Turn: " + game.turn);
             System.out.println();
         }
         System.out.println("  +---+---+---+---+---+---+---+---+");

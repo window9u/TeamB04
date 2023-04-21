@@ -50,7 +50,6 @@ public class ChessGame {
             printMessage = Chessboard.Move(fromX, fromY, toX, toY);
             // 턴 바꾸기
             isWhiteTurn = !isWhiteTurn;
-            Chessboard.TurnCount -= 1;
         }
         printEnding();
 
