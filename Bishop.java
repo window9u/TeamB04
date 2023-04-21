@@ -1,4 +1,4 @@
-//치수
+//치수 이제서야 코딩 시작
 public class Bishop extends ChessPiece{
     //Rook 과 같은 방식으로 구현
     int score;
