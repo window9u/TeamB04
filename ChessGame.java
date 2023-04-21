@@ -142,27 +142,27 @@ public class ChessGame {
 
                 else if ((i == 1 || i == 8) && (j == 2 || j == 7)) {
                     Chessboard.board[j][i] = new Knight(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Knight(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Knight(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 1 || j == 8)) {
                     Chessboard.board[j][i] = new Rook(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Rook(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Rook(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 3 || j == 6)) {
                     Chessboard.board[j][i] = new Bishop(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Bishop(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Bishop(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 4)) {
                     Chessboard.board[j][i] = new Queen(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Queen(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Queen(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 5)) {
                     Chessboard.board[j][i] = new King(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new King(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new King(false, this.Chessboard);
                 }
             }
         }
