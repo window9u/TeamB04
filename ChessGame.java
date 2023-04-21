@@ -9,24 +9,14 @@ public class ChessGame {
     int fromX, fromY, toX, toY;
     int flag = 0;
     Scanner scan = new Scanner(System.in);
-    String printMessage="Game Start!!";
+    String printMessage = "Game Start!!";
 
     public ChessGame() {
 
     }
 
+    public void StartGame() {
 
-    // 찬규
-    public void startGame(){
-        // Initialize the chess Chessboard and set up the game.
-        // 체스 판 및
-        // 기물 초기화
-        // 체스 게임 시작
-        // 킹이 죽거나 무승부(턴수 제한이 아니면)
-    }
-
-    public void StartGame(){
-        
         initBoard();
         while (!isKingdie() && !isStalemate()) {
             // 보드 출력
@@ -34,7 +24,7 @@ public class ChessGame {
             // 보드 밑에 출력문 출력.
             // printMessage 함수에서 전역변수로 변경.
             // 기존의 printMessage()의 기능은 Chessboard.Move()에서 문자열 리턴.
-            //초기값은 Game Start!!
+            // 초기값은 Game Start!!
             System.out.println(printMessage);
             // 사용자 입력 받기
             inputFrom(isWhiteTurn);
@@ -55,7 +45,6 @@ public class ChessGame {
         printEnding();
 
     }
-
 
     // 재하
     public int pieceColor(int x, int y) {
@@ -133,47 +122,53 @@ public class ChessGame {
 
     // 주혁
     private void initBoard() {
-        //시작 방법?
-        //체스 게임을 시작으로 체스에서 체스 보드를 불러와야 하는데 체스 보드에서는 현재의 체스판을 인자로 받아와야함
-        //이때 ChessBoard(ChessGame game)에서 game에 자기 자신을 넣을 수 없으니 충돌이 발생
-        //Chessboard를 초기화 시킬 수 없어서 시작이 안됨
+        // 시작 방법?
+        // 체스 게임을 시작으로 체스에서 체스 보드를 불러와야 하는데 체스 보드에서는 현재의 체스판을 인자로 받아와야함
+        // 이때 ChessBoard(ChessGame game)에서 game에 자기 자신을 넣을 수 없으니 충돌이 발생
+        // Chessboard를 초기화 시킬 수 없어서 시작이 안됨
 
         this.Chessboard = new ChessBoard(this);
 
-        for (int i = 1; i < Chessboard.board.length; i++){
-            for (int j = 1; j < Chessboard.board[i].length; j++){
+        for (int i = 1; i < Chessboard.board.length; i++) {
+            for (int j = 1; j < Chessboard.board[i].length; j++) {
                 if (i == 2 || i == 7) {
                     Chessboard.board[j][i] = new Pawn(true, this.Chessboard);
-                    if (i == 1) Chessboard.board[j][i] = new Pawn(false, this.Chessboard);
+                    if (i == 1)
+                        Chessboard.board[j][i] = new Pawn(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 2 || j == 7)) {
                     Chessboard.board[j][i] = new Knight(true, this.Chessboard);
-                    if (i == 1) Chessboard.board[j][i] = new Knight(false, this.Chessboard);
+                    if (i == 1)
+                        Chessboard.board[j][i] = new Knight(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 1 || j == 8)) {
                     Chessboard.board[j][i] = new Rook(true, this.Chessboard);
-                    if (i == 1) Chessboard.board[j][i] = new Rook(false, this.Chessboard);
+                    if (i == 1)
+                        Chessboard.board[j][i] = new Rook(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 3 || j == 6)) {
                     Chessboard.board[j][i] = new Bishop(true, this.Chessboard);
-                    if (i == 1) Chessboard.board[j][i] = new Bishop(false, this.Chessboard);
+                    if (i == 1)
+                        Chessboard.board[j][i] = new Bishop(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 4)) {
                     Chessboard.board[j][i] = new Queen(true, this.Chessboard);
-                    if (i == 1) Chessboard.board[j][i] = new Queen(false, this.Chessboard);
+                    if (i == 1)
+                        Chessboard.board[j][i] = new Queen(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 5)) {
                     Chessboard.board[j][i] = new King(true, this.Chessboard);
-                    if (i == 1) Chessboard.board[j][i] = new King(false, this.Chessboard);
+                    if (i == 1)
+                        Chessboard.board[j][i] = new King(false, this.Chessboard);
                 }
             }
         }
-        
+
     }
 
     // 경식
