@@ -11,8 +11,13 @@ public class ChessGame {
     Scanner scan = new Scanner(System.in);
     String printMessage="Game Start!!";
 
-    // 찬규
     public ChessGame() {
+
+    }
+
+
+    // 찬규
+    public void startGame(){
         // Initialize the chess Chessboard and set up the game.
         // 체스 판 및
         // 기물 초기화
@@ -48,7 +53,9 @@ public class ChessGame {
             Chessboard.TurnCount -= 1;
         }
         printEnding();
+
     }
+
 
     // 재하
     public int pieceColor(int x, int y) {
@@ -131,7 +138,7 @@ public class ChessGame {
         //이때 ChessBoard(ChessGame game)에서 game에 자기 자신을 넣을 수 없으니 충돌이 발생
         //Chessboard를 초기화 시킬 수 없어서 시작이 안됨
 
-        Chessboard = new ChessBoard(this);
+        this.Chessboard = new ChessBoard(this);
 
         for (int i = 1; i < Chessboard.board.length; i++){
             for (int j = 1; j < Chessboard.board[i].length; j++){
@@ -166,6 +173,7 @@ public class ChessGame {
                 }
             }
         }
+        
     }
 
     // 경식
