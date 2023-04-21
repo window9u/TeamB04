@@ -11,8 +11,13 @@ public class ChessGame {
     Scanner scan = new Scanner(System.in);
     String printMessage="Game Start!!";
 
-    // 찬규
     public ChessGame() {
+
+    }
+
+
+    // 찬규
+    public void startGame(){
         // Initialize the chess Chessboard and set up the game.
         // 체스 판 및
         // 기물 초기화
@@ -46,7 +51,9 @@ public class ChessGame {
             isWhiteTurn = !isWhiteTurn;
         }
         printEnding();
+
     }
+
 
     // 재하
     public int pieceColor(int x, int y) {
@@ -128,8 +135,6 @@ public class ChessGame {
         //체스 게임을 시작으로 체스에서 체스 보드를 불러와야 하는데 체스 보드에서는 현재의 체스판을 인자로 받아와야함
         //이때 ChessBoard(ChessGame game)에서 game에 자기 자신을 넣을 수 없으니 충돌이 발생
         //Chessboard를 초기화 시킬 수 없어서 시작이 안됨
-
-
         for (int i = 1; i < Chessboard.board.length; i++){
             for (int j = 1; j < Chessboard.board[i].length; j++){
                 if (i == 2 || i == 7) {
@@ -163,6 +168,7 @@ public class ChessGame {
                 }
             }
         }
+        
     }
 
     // 경식
