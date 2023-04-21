@@ -4,7 +4,7 @@ public class ChessBoard {
     ChessPiece[][] board = new ChessPiece[9][9];
     int WhiteScore;
     int BlackScore;
-    int TurnCount;
+    int TurnCount = 50;
 
     public ChessBoard(ChessGame game) {
         this.game = game;

@@ -19,8 +19,9 @@ public class ChessGame {
         initBoard();
         // 체스 게임 시작
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
-        Chessboard.printBoard();
+    }
 
+    public void StartGame(){
         while (!isKingdie() && !isStalemate()) {
             // 보드 출력
             Chessboard.printBoard();
@@ -41,9 +42,10 @@ public class ChessGame {
                 break;
             }
             // 이동
-            printMessage =Chessboard.Move(fromX, fromY, toX, toY);
+            printMessage = Chessboard.Move(fromX, fromY, toX, toY);
             // 턴 바꾸기
             isWhiteTurn = !isWhiteTurn;
+            Chessboard.TurnCount -= 1;
         }
         printEnding();
     }
@@ -129,6 +131,7 @@ public class ChessGame {
         //이때 ChessBoard(ChessGame game)에서 game에 자기 자신을 넣을 수 없으니 충돌이 발생
         //Chessboard를 초기화 시킬 수 없어서 시작이 안됨
 
+        Chessboard = new ChessBoard(this);
 
         for (int i = 1; i < Chessboard.board.length; i++){
             for (int j = 1; j < Chessboard.board[i].length; j++){
