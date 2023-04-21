@@ -58,15 +58,32 @@ public class ChessGame {
         // piece를 사용하여 판별
 
         ChessPiece piece = this.Chessboard.board[x][y];
+        if(piece.isWhite == null) {
+            System.out.println("해당 좌표에 기물이 없습니다.");
+            return 0;
+        }
+        else if(piece.isWhite == isWhite) {
+            System.out.println("해당 기물은 백입니다.");
+            return 1;
+        }
+        else if(piece == !isWite) {
+            System.out.println("해당 기물은 흑입니다.");
+            return -1;
+        }
+
         return 1;
     }
-    //재하
+
+    // 재하
     private void inputFrom(boolean isWhiteTurn) {
         // 선택할 말의 위치를 선택하시오: "A8"에서 문자열 추출 후 toX:1, toY:8 대입
         // 만일 잘못된 위치를 선택 시 오류 메세지(위치가 잘못되었습니다. 다시 입력하세요.) 출력 후 재입력 받음
         // 결국 이 함수에 목적은 움직일 말이 있는 정상 위치를 입력받는 것임.
         // 정상 값을 입력할때까지 이 함수 안에서 다시 입력받을 것
         // pieceColor() 사용하기
+
+        System.out.print("영어로 쓰기 :");
+
         while (true) {
 
             //  fromX, fromY 입력받기
@@ -74,14 +91,18 @@ public class ChessGame {
             // 예외처리
             if(inputstr.equals("quit")) {
                 this.flag = -1;
-                continue;
+                break;
             } else if(inputstr.length() == 2 && inputstr.cahrAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
                     && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
                 // 정상입력
-                this.fromX
+                this.fromX = inputstr.charAt(0) - 'A' + 1;
+                this.toY = inputstr.charAt(1) - '0';
             }
-
-
+            else {
+                //재입력
+                System.out.println("input error");
+                continue;
+            }
 
             // str에 "'A~H"+'1~8'문자열 입력 ex) A8"을 입력받아서 fromX:1, fromY:8 대입 (문자열 처리)
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
@@ -90,7 +111,8 @@ public class ChessGame {
             // 예외처리: 비어있는 위치 입력 시 오류 메세지 출력 후 재입력 받음
             // 예외처리: 흑의 차례에 백의 말을 선택한 경우 오류 메세지 출력 후 재입력 받음
             // 예외처리: 백의 차례에 흑의 말을 선택한 경우 오류 메세지 출력 후 재입력 받음
-           
+
+        }
     }
     //찬규
     private int inputTo(boolean isWhiteTurn) {
