@@ -1,16 +1,19 @@
 public class ChessBoard {
     private ChessGame game;
-     ChessPiece[][] board;
-     int WhiteScore;
-     int BlackScore;
+    //9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
+    ChessPiece[][] board = new ChessPiece[9][9];
+    int WhiteScore;
+    int BlackScore;
+    int TurnCount;
 
     public ChessBoard(ChessGame game) {
         this.game = game;
-        board=new ChessPiece[9][9];//9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
-        //흰색 룩 초기화, 이런식으로 16개의 말 모두 초기화
-        //폰같이 많은 기물은 for문 또한 사용 가능
-
-        // Create the graphical representation of the chess Chessboard.
+        board=new ChessPiece[9][9];
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                board[i][j] = null;
+            }
+        }
     }
 
     //치수
@@ -61,7 +64,29 @@ public class ChessBoard {
         //이후 White score와 Black score를 출력
         //White score와 Black score는 각각 WhiteScore와 BlackScore에 저장되어 있음
         //출력
-        
+
+        System.out.println("    A   B   C   D   E   F   G   H  ");
+        for (int i = 1; i < board.length; i++) {
+            System.out.println("  +---+---+---+---+---+---+---+---+");
+            System.out.print(8 - i + " ");
+            for (int j = 1; j < board[i].length; j++) {
+                System.out.print("| ");
+                if (board[j][i] instanceof ChessPiece) System.out.print(board[j][i].toString());
+                else if ((i + j) % 2 != 1) System.out.print("■");
+                else System.out.print(" ");
+                System.out.print(" ");
+            }
+            System.out.print("| ");
+            System.out.print(8 - i + " ");
+            if (i == 1) System.out.print(" White score: " + WhiteScore);
+            if (i == 2) System.out.print(" Black score: " + BlackScore);
+            if (i == 8) System.out.print(" Turn: " + TurnCount);
+            System.out.println();
+        }
+        System.out.println("  +---+---+---+---+---+---+---+---+");
+        System.out.println("    A   B   C   D   E   F   G   H  ");
+
+
 
 
     }
