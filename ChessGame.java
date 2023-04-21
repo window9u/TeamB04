@@ -20,6 +20,8 @@ public class ChessGame {
         initBoard();
         // 체스 게임 시작
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
+        Chessboard.printBoard();
+
         while (!isKingdie() && !isStalemate()) {
             // 보드 출력
             Chessboard.printBoard();
@@ -166,7 +168,24 @@ public class ChessGame {
     // 치수
     private void printEnding() {
         // ex) White Win!!
-     
+        if (isKingdie()) { //king이 죽어서 끝난 경우
+            if (isWhiteTurn) { //black 승
+                System.out.println("White King die, Black Win !!");
+            } else { //white 승
+                System.out.println("Black King die, White Win!!");
+            }
+        } else if (isTurnsleft()) { // 턴이 끝나서 종료된 경우
+            if (WhiteScore > BlackScore) {
+                System.out.println("White Score : "+WhiteScore+"\nBlack Score : "+BlackScore+"\nWhite Win !!");
+            } else if (WhiteScore < BlackScore) {
+                System.out.println("White Score : "+WhiteScore+"\nBlack Score : "+BlackScore+"\nBlack Win !!");
+            } else {
+                System.out.println("White Score : "+WhiteScore+"\nBlack Score : "+BlackScore+"\nDraw !!");
+            }
+
+        } else {
+            System.out.println("Emergency Termination");
+        }
 
     }
 
@@ -232,7 +251,7 @@ public class ChessGame {
     }
 
     // 치수
-    public boolean isStalemate() {
+    public boolean isTurnsleft() {
         // Determine whether the game is in stalemate.
         
         // 턴수가 끝났는지 검사
