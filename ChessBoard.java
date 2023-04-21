@@ -14,13 +14,15 @@ public class ChessBoard {
     }
 
     //치수
-    public boolean Move(int i, int i1, int i2, int i3) {
+    public String Move(int i, int i1, int i2, int i3) {
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
         //i,i1 null로 처리하기
         //case1. 빈 공간으로 이동한 경우board(i2,i3)이 null인 경우
         //case2. 상대방 말이 있는 경우 점수를 더해주는 과정 거침
+        //리턴 값은 "White(Black) move Knight to A7" 이런식으로.
+        String str = "";
         ChessPiece piece=board[i][i1];
-        return false;
+        return str;
     }
 
     //주혁

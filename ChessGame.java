@@ -5,9 +5,11 @@ public class ChessGame {
     boolean isWhiteTurn;
     int WhiteScore;
     int BlackScore;
-    int turn=50;// 총 턴
+    int turn = 50;// 총 턴
     int fromX, fromY, toX, toY;
+    int flag = 0;
     Scanner scan = new Scanner(System.in);
+    String printMessage = "Game Start!!";
 
     //찬규
     public ChessGame() {
@@ -17,23 +19,27 @@ public class ChessGame {
         initBoard();
         // 체스 게임 시작
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
-        int flag = 0;
         while (!isKingdie() && !isStalemate()) {
             // 보드 출력
             Chessboard.printBoard();
             // 보드 밑에 출력문 출력.
-            printMessage(isWhiteTurn);
+            // printMessage 함수에서 전역변수로 변경.
+            // 기존의 printMessage()의 기능은 Chessboard.Move()에서 문자열 리턴.
+            //초기값은 Game Start!!
+            System.out.println(printMessage);
             // 사용자 입력 받기
             inputFrom(isWhiteTurn);
-
-            flag = inputTo(isWhiteTurn);
+            if (flag == -1) {// 긴급종료
+                break;
+            }
+            inputTo(isWhiteTurn);
             if (flag == 0) {// 기물을 다시 선택하는 경우
                 continue;
             } else if (flag == -1) {// 긴급종료
                 break;
             }
             // 이동
-            Chessboard.Move(fromX, fromY, toX, toY);
+            printMessage = Chessboard.Move(fromX, fromY, toX, toY);
             // 턴 바꾸기
             isWhiteTurn = !isWhiteTurn;
         }
@@ -63,7 +69,20 @@ public class ChessGame {
         // pieceColor() 사용하기
         while (true) {
 
-            String str = scan.nextLine();
+            //  fromX, fromY 입력받기
+            String inputstr = scan.nextLine();
+            // 예외처리
+            if(inputstr.equals("quit")) {
+                this.flag = -1;
+                continue;
+            } else if(inputstr.length() == 2 && inputstr.cahrAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
+                    && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
+                // 정상입력
+                this.fromX
+            }
+
+
+
             // str에 "'A~H"+'1~8'문자열 입력 ex) A8"을 입력받아서 fromX:1, fromY:8 대입 (문자열 처리)
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
             // str에 fromX, fromY 추출
@@ -83,15 +102,35 @@ public class ChessGame {
 
             // toX, toY 입력받기
 
-            String str = this.Chessboard.board[fromX][fromY].canMove(fromX, fromY, toX, toY);
-            if (str.equals("wrong")) {// 재입력
+            String inputstr = scan.nextLine();
+            // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
+            if (inputstr.equals("quit")) {// 긴급종료
+                this.flag = -1;
                 continue;
-            } else if (str.equals("quit")) {
-                return -1;
-            } else if (str.equals("back")) {
-                return 0;
-            } else {// 정상이동
-                return 1;
+            } else if (inputstr.equals("back")) { // 기물을 다시 선택하는 경우
+                this.flag = 0;
+                continue;
+            } else if (inputstr.length() == 2 && inputstr.charAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
+                    && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
+                // 정상입력
+                this.toX = inputstr.charAt(0) - 'A' + 1;
+                this.toY = inputstr.charAt(1) - '0';
+            } else {
+                // 재입력
+                System.out.println("input error");
+                continue;
+            }
+
+            String str = this.Chessboard.board[fromX][fromY].canMove(fromX, fromY, toX, toY);
+
+            if (str.equals("move")) {// 정상이동
+                break;
+            } else if (str.equals("eat")) {// 정상이동
+                break;
+            } else {
+                // 재입력
+                System.out.println(str);
+                continue;
             }
         }
 
