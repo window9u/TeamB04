@@ -24,8 +24,9 @@ public class ChessGame {
         initBoard();
         // 체스 게임 시작
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
-        Chessboard.printBoard();
+    }
 
+    public void StartGame(){
         while (!isKingdie() && !isStalemate()) {
             // 보드 출력
             Chessboard.printBoard();
@@ -46,9 +47,10 @@ public class ChessGame {
                 break;
             }
             // 이동
-            printMessage =Chessboard.Move(fromX, fromY, toX, toY);
+            printMessage = Chessboard.Move(fromX, fromY, toX, toY);
             // 턴 바꾸기
             isWhiteTurn = !isWhiteTurn;
+            Chessboard.TurnCount -= 1;
         }
         printEnding();
 
@@ -135,6 +137,9 @@ public class ChessGame {
         //체스 게임을 시작으로 체스에서 체스 보드를 불러와야 하는데 체스 보드에서는 현재의 체스판을 인자로 받아와야함
         //이때 ChessBoard(ChessGame game)에서 game에 자기 자신을 넣을 수 없으니 충돌이 발생
         //Chessboard를 초기화 시킬 수 없어서 시작이 안됨
+
+        this.Chessboard = new ChessBoard(this);
+
         for (int i = 1; i < Chessboard.board.length; i++){
             for (int j = 1; j < Chessboard.board[i].length; j++){
                 if (i == 2 || i == 7) {
@@ -144,27 +149,27 @@ public class ChessGame {
 
                 else if ((i == 1 || i == 8) && (j == 2 || j == 7)) {
                     Chessboard.board[j][i] = new Knight(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Knight(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Knight(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 1 || j == 8)) {
                     Chessboard.board[j][i] = new Rook(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Rook(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Rook(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 3 || j == 6)) {
                     Chessboard.board[j][i] = new Bishop(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Bishop(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Bishop(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 4)) {
                     Chessboard.board[j][i] = new Queen(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new Queen(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new Queen(false, this.Chessboard);
                 }
 
                 else if ((i == 1 || i == 8) && (j == 5)) {
                     Chessboard.board[j][i] = new King(true, this.Chessboard);
-                    if (i == 0) Chessboard.board[j][i] = new King(false, this.Chessboard);
+                    if (i == 1) Chessboard.board[j][i] = new King(false, this.Chessboard);
                 }
             }
         }
