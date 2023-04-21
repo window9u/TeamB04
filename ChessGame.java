@@ -21,12 +21,13 @@ public class ChessGame {
         // Initialize the chess Chessboard and set up the game.
         // 체스 판 및
         // 기물 초기화
-        initBoard();
         // 체스 게임 시작
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
     }
 
     public void StartGame(){
+        
+        initBoard();
         while (!isKingdie() && !isStalemate()) {
             // 보드 출력
             Chessboard.printBoard();
