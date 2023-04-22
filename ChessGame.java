@@ -18,6 +18,8 @@ public class ChessGame {
     public void StartGame() {
 
         initBoard();
+        // 체스 게임 시작
+        // 킹이 죽거나 무승부(턴수 제한이 아니면)
         while (!isKingdie() && !isStalemate()) {
             // 보드 출력
             Chessboard.printBoard();
@@ -53,6 +55,16 @@ public class ChessGame {
         // piece를 사용하여 판별
 
         ChessPiece piece = this.Chessboard.board[x][y];
+        if(piece.isWhite == null) {
+            return 0;
+        }
+        else if(piece.isWhite == isWhite) {
+            return 1;
+        }
+        else if(piece == !isWite) {
+            return -1;
+        }
+
         return 1;
     }
 
@@ -63,9 +75,45 @@ public class ChessGame {
         // 결국 이 함수에 목적은 움직일 말이 있는 정상 위치를 입력받는 것임.
         // 정상 값을 입력할때까지 이 함수 안에서 다시 입력받을 것
         // pieceColor() 사용하기
-        while (true) {
 
-            String str = scan.nextLine();
+        while (true) {
+            System.out.print("Choose piece:");
+            //  fromX, fromY 입력받기
+            String inputstr = scan.nextLine();
+            // 예외처리
+            if(inputstr.equals("quit")) {
+                this.flag = -1;
+                break;
+            } else if(inputstr.length() == 2 && inputstr.cahrAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
+                    && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
+                // 정상입력
+                this.fromX = inputstr.charAt(0) - 'A' + 1;
+                this.toY = inputstr.charAt(1) - '0';
+                if(isWhiteTurn == true) {
+                    // 백 차례일 때 백의 말을 선택한 경우
+                    if(pieceColor(fromX, fromY) == 1)
+                        break;
+                    // 백 차례일 때 흑의 말을 선택하거나 선택한 좌표가 비어있는 경우
+                    else if(pieceColor(fromX, fromY) == -1 || pieceColor(fromX, fromY) == 0) {
+                        System.out.println("Choose white piece");
+                        continue;
+                    }
+                } else if(isWhiteTurn == false) {
+                    // 흑 차례일 때 백의 말을 선택한 경우
+                    if(pieceColor(fromX, fromY) == -1)
+                        break;
+                    // 흑 차례일 때 백의 말을 선택하거나 선택한 좌표가 비어있는 경우
+                    else if(pieceColor(fromX, fromY) == 1 || pieceColor(fromX, fromY) == 0) {
+                        System.out.println("Choose black piece");
+                        continue;
+                    }
+                }
+            } else {
+                //재입력
+                System.out.println("input error");
+                continue;
+            }
+
             // str에 "'A~H"+'1~8'문자열 입력 ex) A8"을 입력받아서 fromX:1, fromY:8 대입 (문자열 처리)
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
             // str에 fromX, fromY 추출
@@ -82,6 +130,7 @@ public class ChessGame {
         // 선택할 말의 위치를 선택하시오: "A8"에서 문자열 추출 후 toX:1, toY:8 대입
         // 만일 잘못된 위치를 선택 시 오류 메세지 출력 후 재입력 받음
         while (true) {
+            System.out.print("Choose piece:");
             // toX, toY 입력받기
             String inputstr = scan.nextLine();
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
