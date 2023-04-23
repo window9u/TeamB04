@@ -38,10 +38,8 @@ public class ChessBoard {
                 BlackScore+=piece2.Score;
             }
         }
-        tmp=piece2; 
         piece2=piece1;
-        piece1=tmp;
-        
+
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
         
         //i,i1 null로 처리하기
