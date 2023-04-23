@@ -7,9 +7,9 @@ public class ChessBoard {
 
     public ChessBoard(ChessGame game) {
         this.game = game;
-        board=new ChessPiece[9][9];
-        for (int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[i].length; j++){
+        board = new ChessPiece[9][9];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = null;
             }
         }
@@ -17,35 +17,36 @@ public class ChessBoard {
 
     //치수
     public String Move(int i, int i1, int i2, int i3) {
-        String str="";
-        ChessPiece piece1=board[i][i1];
-        ChessPiece piece2=board[i2][i3];
-        String cstr=String.valueOf((char)(65+i2-1))+i3;
-        if(piece1.isWhite()){
+        String str = "";
+        ChessPiece piece1 = board[i][i1];
+        ChessPiece piece2 = board[i2][i3];
+        String cstr = String.valueOf((char) (65 + i2 - 1)) + i3;
+        if (piece1.isWhite()) {
             //White 말 이동하는 경우
-            str="White move "+piece1.toString()+" to "+cstr; 
-            if(piece2!=null){
+            str = "White move " + piece1.toString() + " to " + cstr;
+            if (piece2 != null) {
                 //이동하려는 위치에 상대방 말이 있는 경우
-                WhiteScore+=piece2.Score;   
+                WhiteScore += piece2.Score;
             }
-        }
-        else{
+        } else {
             //Black 말 이동하는 경우
-            str="Black move "+piece1.toString()+" to "+cstr;
-            if(piece2!=null){
+            str = "Black move " + piece1.toString() + " to " + cstr;
+            if (piece2 != null) {
                 //이동하려는 위치에 상대방 말이 있는 경우
-                BlackScore+=piece2.Score;
+                BlackScore += piece2.Score;
             }
         }
-        piece2=piece1;
+        board[i2][i3] = piece1;
+        board[i][i1] = null;
+
 
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
-        
+
         //i,i1 null로 처리하기
         //case1. 빈 공간으로 이동한 경우board(i2,i3)이 null인 경우
         //case2. 상대방 말이 있는 경우 점수를 더해주는 과정 거침
         //리턴 값은 "White(Black) move Knight to A7" 이런식으로.
-      
+
         return str;
     }
 
@@ -106,8 +107,6 @@ public class ChessBoard {
         }
         System.out.println("  +---+---+---+---+---+---+---+---+");
         System.out.println("    A   B   C   D   E   F   G   H  ");
-
-
 
 
     }

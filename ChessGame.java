@@ -7,7 +7,7 @@ public class ChessGame {
     int BlackScore;
     int turn = 50;// 총 턴
     int fromX, fromY, toX, toY;
-    int flag = 0;
+    int flag = 30;
     Scanner scan = new Scanner(System.in);
     String printMessage = "Game Start!!";
 
@@ -31,21 +31,27 @@ public class ChessGame {
             // 사용자 입력 받기
             inputFrom(isWhiteTurn);
             if (flag == -1) {// 긴급종료
+                flag=30;
                 break;
             }
             inputTo(isWhiteTurn);
             if (flag == 0) {// 기물을 다시 선택하는 경우
+                flag=30;
                 continue;
             } else if (flag == -1) {// 긴급종료
+                flag=30;
                 break;
             }
             // 이동
             printMessage = Chessboard.Move(fromX, fromY, toX, toY);
             // 턴 바꾸기
-            isWhiteTurn = !isWhiteTurn;
+            if(isWhiteTurn==true) {
+                isWhiteTurn= false;
+            }else {
+                isWhiteTurn=true;
+            }
         }
         printEnding();
-
     }
 
     // 재하
@@ -91,8 +97,9 @@ public class ChessGame {
                 System.out.println("fromX: " + fromX + " fromY: " + fromY);
                 if(isWhiteTurn == true) {
                     // 백 차례일 때 백의 말을 선택한 경우
-                    if(pieceColor(fromX, fromY) == 1)
+                    if(pieceColor(fromX, fromY) == 1){
                         break;
+                    }
                     // 백 차례일 때 흑의 말을 선택하거나 선택한 좌표가 비어있는 경우
                     else if(pieceColor(fromX, fromY) == -1 || pieceColor(fromX, fromY) == 0) {
                         System.out.println("Choose white piece");
@@ -101,7 +108,9 @@ public class ChessGame {
                 } else if(isWhiteTurn == false) {
                     // 흑 차례일 때 백의 말을 선택한 경우
                     if(pieceColor(fromX, fromY) == -1)
+                    {
                         break;
+                    }
                     // 흑 차례일 때 백의 말을 선택하거나 선택한 좌표가 비어있는 경우
                     else if(pieceColor(fromX, fromY) == 1 || pieceColor(fromX, fromY) == 0) {
                         System.out.println("Choose black piece");
@@ -136,10 +145,10 @@ public class ChessGame {
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
             if (inputstr.equals("quit")) {// 긴급종료
                 this.flag = -1;
-                continue;
+                break;
             } else if (inputstr.equals("back")) { // 기물을 다시 선택하는 경우
                 this.flag = 0;
-                continue;
+                break;
             } else if (inputstr.length() == 2 && inputstr.charAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
                     && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
                 // 정상입력
