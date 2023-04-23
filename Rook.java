@@ -19,7 +19,7 @@ public class Rook extends ChessPiece{
         if(fromX!=toX&&fromY!=toY) {
             str="wrong";
         }
-        else if(fromX==AtoX&&fromY!=toY) {//세로로 이동
+        else if(fromX==toX&&fromY!=toY) {//세로로 이동
             if(fromY<toY) {//위로 이동
                 for(int i=fromY+1;i<toY;i++) {//이동 경로에 장애물이 있는지 확인
                     if(ChessBoard.board[fromX][i]!=null) {
