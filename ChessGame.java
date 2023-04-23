@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class ChessGame {
     public ChessBoard Chessboard;
-    boolean isWhiteTurn;
+    boolean isWhiteTurn=true;
     int WhiteScore;
     int BlackScore;
     int turn = 50;// 총 턴
@@ -20,9 +20,7 @@ public class ChessGame {
         initBoard();
         // 체스 게임 시작
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
-        Chessboard.printBoard();
-
-        while (!isKingdie() && !isStalemate()) {
+        while (!isKingdie() && !isTurnsleft()) {
             // 보드 출력
             Chessboard.printBoard();
             // 보드 밑에 출력문 출력.
@@ -57,13 +55,13 @@ public class ChessGame {
         // piece를 사용하여 판별
 
         ChessPiece piece = this.Chessboard.board[x][y];
-        if(piece.isWhite == null) {
+        if(piece==null) {
             return 0;
         }
-        else if(piece.isWhite == isWhite) {
+        else if(piece.isWhite == true) {
             return 1;
         }
-        else if(piece == !isWite) {
+        else if(piece.isWhite == false) {
             return -1;
         }
 
@@ -86,7 +84,7 @@ public class ChessGame {
             if(inputstr.equals("quit")) {
                 this.flag = -1;
                 break;
-            } else if(inputstr.length() == 2 && inputstr.cahrAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
+            } else if(inputstr.length() == 2 && inputstr.charAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
                     && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
                 // 정상입력
                 this.fromX = inputstr.charAt(0) - 'A' + 1;
@@ -198,57 +196,41 @@ public class ChessGame {
 
         this.Chessboard = new ChessBoard(this);
 
-        for (int i = 1; i < Chessboard.board.length; i++) {
-            for (int j = 1; j < Chessboard.board[i].length; j++) {
-                if (i == 2 || i == 7) {
-                    Chessboard.board[j][i] = new Pawn(true, this.Chessboard);
-                    if (i == 1)
-                        Chessboard.board[j][i] = new Pawn(false, this.Chessboard);
-                }
-
-                else if ((i == 1 || i == 8) && (j == 2 || j == 7)) {
-                    Chessboard.board[j][i] = new Knight(true, this.Chessboard);
-                    if (i == 1)
-                        Chessboard.board[j][i] = new Knight(false, this.Chessboard);
-                }
-
-                else if ((i == 1 || i == 8) && (j == 1 || j == 8)) {
-                    Chessboard.board[j][i] = new Rook(true, this.Chessboard);
-                    if (i == 1)
-                        Chessboard.board[j][i] = new Rook(false, this.Chessboard);
-                }
-
-                else if ((i == 1 || i == 8) && (j == 3 || j == 6)) {
-                    Chessboard.board[j][i] = new Bishop(true, this.Chessboard);
-                    if (i == 1)
-                        Chessboard.board[j][i] = new Bishop(false, this.Chessboard);
-                }
-
-                else if ((i == 1 || i == 8) && (j == 4)) {
-                    Chessboard.board[j][i] = new Queen(true, this.Chessboard);
-                    if (i == 1)
-                        Chessboard.board[j][i] = new Queen(false, this.Chessboard);
-                }
-
-                else if ((i == 1 || i == 8) && (j == 5)) {
-                    Chessboard.board[j][i] = new King(true, this.Chessboard);
-                    if (i == 1)
-                        Chessboard.board[j][i] = new King(false, this.Chessboard);
-                }
-            }
+        for(int i=1;i<9;i++){
+            Chessboard.board[i][2] = new Pawn(true, this.Chessboard);
+        }
+        for(int i=1;i<9;i++){
+            Chessboard.board[i][7] = new Pawn(false, this.Chessboard);
         }
 
+        Chessboard.board[1][1] = new Rook(true, this.Chessboard);
+        Chessboard.board[8][1] = new Rook(true, this.Chessboard);
+        Chessboard.board[1][8] = new Rook(false, this.Chessboard);
+        Chessboard.board[8][8] = new Rook(false, this.Chessboard);
+        Chessboard.board[2][1] = new Knight(true, this.Chessboard);
+        Chessboard.board[7][1] = new Knight(true, this.Chessboard);
+        Chessboard.board[2][8] = new Knight(false, this.Chessboard);
+        Chessboard.board[7][8] = new Knight(false, this.Chessboard);
+        Chessboard.board[3][1] = new Bishop(true, this.Chessboard);
+        Chessboard.board[6][1] = new Bishop(true, this.Chessboard);
+        Chessboard.board[3][8] = new Bishop(false, this.Chessboard);
+        Chessboard.board[6][8] = new Bishop(false, this.Chessboard);
+        Chessboard.board[4][1] = new Queen(true, this.Chessboard);
+        Chessboard.board[5][1] = new King(true, this.Chessboard);
+        Chessboard.board[4][8] = new Queen(false, this.Chessboard);
+        Chessboard.board[5][8] = new King(false, this.Chessboard);
     }
+
 
     // 경식
     public boolean isKingdie() {
             int k = 0;
             for (int i = 1; i < 9; i++) {
                 for(int j = 1; j < 9; j++){
-                    if(ChassBoard.board[i][j] == null){
+                    if(this.Chessboard.board[i][j] == null){
                         continue;
                     }
-                    if (ChassBoard.board[i][j] instanceof King) {
+                    if (Chessboard.board[i][j] instanceof King) {
                         k++;
                     }
                 }
@@ -265,8 +247,6 @@ public class ChessGame {
         // 체스판에서 흑과 백의 킹이 죽었는지 확인
         // 체스판을 모두 돌면서 킹이 두개 존재하는지 확인하면 될 듯
 
-        return true;
-    }
 
     // 치수
     public boolean isTurnsleft() { //남은 턴수 계산, 0이되면 true 반환

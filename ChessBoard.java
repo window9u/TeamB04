@@ -99,7 +99,7 @@ public class ChessBoard {
                 System.out.print(" ");
             }
             System.out.print("| ");
-            System.out.print(8 - i + " ");
+            System.out.print(9 - i + " ");
             if (i == 1) System.out.print(" White score: " + WhiteScore);
             if (i == 2) System.out.print(" Black score: " + BlackScore);
             if (i == 8) System.out.print(" Turn: " + game.turn);
