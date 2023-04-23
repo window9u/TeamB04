@@ -53,7 +53,7 @@ public class Pawn extends ChessPiece{
                 if(countpart==null){
                     //상대방이 없는 경우
                     str= "You cannot move diagonally without eating";
-                }else if(countpart.isWhite==this.isWhite){
+                }else if(countpart.isWhite!=this.isWhite){
                     //상대방이 있는 경우
                     firstMove=false;
                     str= "eat";
@@ -100,7 +100,7 @@ public class Pawn extends ChessPiece{
                 if(countpart==null){
                     //상대방이 없는 경우
                     str= "You cannot move diagonally without eating";
-                }else if(countpart.isWhite==this.isWhite){
+                }else if(countpart.isWhite!=this.isWhite){
                     //상대방이 있는 경우
                     firstMove=false;
                     str= "eat";

@@ -1,11 +1,10 @@
 //치수 
 public class Bishop extends ChessPiece {
     // Rook 과 같은 방식으로 구현
-    int score;
 
     public Bishop(boolean isWhite, ChessBoard board) {
         super(isWhite, board);
-        int score = 3;
+        this.Score = 3;
     }
 
     @Override

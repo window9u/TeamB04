@@ -2,8 +2,6 @@ public class ChessBoard {
     private ChessGame game;
     //9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
     ChessPiece[][] board = new ChessPiece[9][9];
-    int WhiteScore;
-    int BlackScore;
 
     public ChessBoard(ChessGame game) {
         this.game = game;
@@ -26,20 +24,18 @@ public class ChessBoard {
             str = "White move " + piece1.toString() + " to " + cstr;
             if (piece2 != null) {
                 //이동하려는 위치에 상대방 말이 있는 경우
-                WhiteScore += piece2.Score;
+                game.WhiteScore += piece2.Score;
             }
         } else {
             //Black 말 이동하는 경우
             str = "Black move " + piece1.toString() + " to " + cstr;
             if (piece2 != null) {
                 //이동하려는 위치에 상대방 말이 있는 경우
-                BlackScore += piece2.Score;
+                game.BlackScore += piece2.Score;
             }
         }
         board[i2][i3] = piece1;
         board[i][i1] = null;
-
-
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
 
         //i,i1 null로 처리하기
@@ -100,8 +96,8 @@ public class ChessBoard {
             }
             System.out.print("| ");
             System.out.print(i + " ");
-            if (i == 8) System.out.print(" White score: " + WhiteScore);
-            if (i == 7) System.out.print(" Black score: " + BlackScore);
+            if (i == 8) System.out.print(" White score: " + game.WhiteScore);
+            if (i == 7) System.out.print(" Black score: " + game.BlackScore);
             if (i == 1) System.out.print(" Turn: " + game.turn);
             System.out.println();
         }

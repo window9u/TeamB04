@@ -1,11 +1,10 @@
 //재하
 public class King extends ChessPiece{
     //Rook과 같은 방식으로 점수 초기화 및 canMove() 메소드 구현
-    int score;
     public King(boolean isWhite, ChessBoard board) {
         super(isWhite,board);
         //점수 초기화
-        int score=100;
+        this.Score=100;
     }
 
     @Override

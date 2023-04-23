@@ -5,9 +5,9 @@ public class ChessGame {
     boolean isWhiteTurn=true;
     int WhiteScore;
     int BlackScore;
-    int turn = 50;// 총 턴
+    int turn = 51;// 총 턴
     int fromX, fromY, toX, toY;
-    int flag = 30;
+    int flag = 999;
     Scanner scan = new Scanner(System.in);
     String printMessage = "Game Start!!";
 
@@ -31,7 +31,6 @@ public class ChessGame {
             // 사용자 입력 받기
             inputFrom(isWhiteTurn);
             if (flag == -1) {// 긴급종료
-                flag=30;
                 break;
             }
             inputTo(isWhiteTurn);
@@ -39,7 +38,6 @@ public class ChessGame {
                 flag=30;
                 continue;
             } else if (flag == -1) {// 긴급종료
-                flag=30;
                 break;
             }
             // 이동
@@ -260,6 +258,8 @@ public class ChessGame {
     // 치수
     public boolean isTurnsleft() { //남은 턴수 계산, 0이되면 true 반환
         if(turn>0){
+            if(flag==30)
+                return false;
             turn--;
             return false;
         }

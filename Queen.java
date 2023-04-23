@@ -2,12 +2,11 @@
 public class Queen extends ChessPiece {
 
     //Rook과 같은 방식으로 score를 초기화하고, canMove()를 구현하세요.
-    int score;
 
     public Queen(boolean isWhite, ChessBoard board) {
         super(isWhite, board);
         //점수 초기화
-        int score = 9;
+        this.Score = 9;
     }
 
     @Override

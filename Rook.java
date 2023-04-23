@@ -1,9 +1,8 @@
 public class Rook extends ChessPiece{
-    int score;
     public Rook(boolean isWhite, ChessBoard board) {
         super(isWhite,board);
         //점수 초기화
-        int score=5;
+        this.Score=5;
     }
 
     @Override
