@@ -61,11 +61,9 @@ public class ChessGame {
         else if(piece.isWhite == true) {
             return 1;
         }
-        else if(piece.isWhite == false) {
+        else{
             return -1;
         }
-
-        return 1;
     }
 
     // 재하
@@ -88,7 +86,9 @@ public class ChessGame {
                     && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
                 // 정상입력
                 this.fromX = inputstr.charAt(0) - 'A' + 1;
-                this.toY = inputstr.charAt(1) - '0';
+                this.fromY = inputstr.charAt(1) - '0';
+                //디버깅용
+                System.out.println("fromX: " + fromX + " fromY: " + fromY);
                 if(isWhiteTurn == true) {
                     // 백 차례일 때 백의 말을 선택한 경우
                     if(pieceColor(fromX, fromY) == 1)
@@ -130,7 +130,7 @@ public class ChessGame {
         // 선택할 말의 위치를 선택하시오: "A8"에서 문자열 추출 후 toX:1, toY:8 대입
         // 만일 잘못된 위치를 선택 시 오류 메세지 출력 후 재입력 받음
         while (true) {
-            System.out.print("Choose piece:");
+            System.out.print("Choose where to go:");
             // toX, toY 입력받기
             String inputstr = scan.nextLine();
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음

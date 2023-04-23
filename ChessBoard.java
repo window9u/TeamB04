@@ -20,7 +20,6 @@ public class ChessBoard {
         String str="";
         ChessPiece piece1=board[i][i1];
         ChessPiece piece2=board[i2][i3];
-        ChessPiece tmp=null;
         String cstr=String.valueOf((char)(65+i2-1))+i3;
         if(piece1.isWhite()){
             //White 말 이동하는 경우
@@ -88,9 +87,9 @@ public class ChessBoard {
         //출력
 
         System.out.println("    A   B   C   D   E   F   G   H  ");
-        for (int i = 1; i < board.length; i++) {
+        for (int i = 8; i > 0; i--) {
             System.out.println("  +---+---+---+---+---+---+---+---+");
-            System.out.print(8 - i + " ");
+            System.out.print(i + " ");
             for (int j = 1; j < board[i].length; j++) {
                 System.out.print("| ");
                 if (board[j][i] instanceof ChessPiece) System.out.print(board[j][i].toString());
@@ -99,10 +98,10 @@ public class ChessBoard {
                 System.out.print(" ");
             }
             System.out.print("| ");
-            System.out.print(9 - i + " ");
-            if (i == 1) System.out.print(" White score: " + WhiteScore);
-            if (i == 2) System.out.print(" Black score: " + BlackScore);
-            if (i == 8) System.out.print(" Turn: " + game.turn);
+            System.out.print(i + " ");
+            if (i == 8) System.out.print(" White score: " + WhiteScore);
+            if (i == 7) System.out.print(" Black score: " + BlackScore);
+            if (i == 1) System.out.print(" Turn: " + game.turn);
             System.out.println();
         }
         System.out.println("  +---+---+---+---+---+---+---+---+");
