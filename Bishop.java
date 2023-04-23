@@ -33,7 +33,7 @@ public class Bishop extends ChessPiece {
                         if(ChessBoard.board[toX][toY]==null){ //비어있으면
                             str="move";
                         }
-                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[toX][toY].isWhite){ //상대편 말이 있는경우
+                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[fromX][fromY].isWhite){ //상대편 말이 있는경우
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
@@ -50,7 +50,7 @@ public class Bishop extends ChessPiece {
                         if(ChessBoard.board[toX][toY]==null){ //비어있으면
                             str="move";
                         }
-                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[toX][toY].isWhite){ //상대편 말이 있는경우
+                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[fromX][fromY].isWhite){ //상대편 말이 있는경우
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
@@ -70,7 +70,7 @@ public class Bishop extends ChessPiece {
                         if(ChessBoard.board[toX][toY]==null){ //비어있으면
                             str="move";
                         }
-                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[toX][toY].isWhite){ //상대편 말이 있는경우
+                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[fromX][fromY].isWhite){ //상대편 말이 있는경우
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
@@ -87,7 +87,7 @@ public class Bishop extends ChessPiece {
                         if(ChessBoard.board[toX][toY]==null){ //비어있으면
                             str="move";
                         }
-                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[toX][toY].isWhite){ //상대편 말이 있는경우
+                        else if(ChessBoard.board[toX][toY].isWhite!=ChessBoard.board[fromX][fromY].isWhite){ //상대편 말이 있는경우
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
