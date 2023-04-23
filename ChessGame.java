@@ -110,6 +110,24 @@ public class ChessGame {
     }
     //경식
     public boolean isKingdie() {
+            int k = 0;
+            for (int i = 1; i < 9; i++) {
+                for(int j = 1; j < 9; j++){
+                    if(ChassBoard.board[i][j] == null){
+                        continue;
+                    }
+                    if (ChassBoard.board[i][j] instanceof King) {
+                        k++;
+                    }
+                }
+            }
+            if(k == 2){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
         // 킹이 죽었는지 확인
         // 킹이 죽었으면 true, 아니면 false
         // 체스판에서 흑과 백의 킹이 죽었는지 확인
