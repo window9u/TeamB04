@@ -1,26 +1,53 @@
 public class ChessBoard {
     private ChessGame game;
-     ChessPiece[][] board;
-     int WhiteScore;
-     int BlackScore;
+    //9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
+    ChessPiece[][] board = new ChessPiece[9][9];
+    int WhiteScore;
+    int BlackScore;
 
     public ChessBoard(ChessGame game) {
         this.game = game;
-        board=new ChessPiece[9][9];//9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
-        //흰색 룩 초기화, 이런식으로 16개의 말 모두 초기화
-        //폰같이 많은 기물은 for문 또한 사용 가능
-
-        // Create the graphical representation of the chess Chessboard.
+        board=new ChessPiece[9][9];
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                board[i][j] = null;
+            }
+        }
     }
 
     //치수
-    public boolean Move(int i, int i1, int i2, int i3) {
+    public String Move(int i, int i1, int i2, int i3) {
+        String str="";
+        ChessPiece piece1=board[i][i1];
+        ChessPiece piece2=board[i2][i3];
+        ChessPiece tmp=null;
+        String cstr=String.valueOf((char)(65+i2-1))+i3;
+        if(piece1.isWhite()){
+            //White 말 이동하는 경우
+            str="White move "+piece1.toString()+" to "+cstr; 
+            if(piece2!=null){
+                //이동하려는 위치에 상대방 말이 있는 경우
+                WhiteScore+=piece2.Score;   
+            }
+        }
+        else{
+            //Black 말 이동하는 경우
+            str="Black move "+piece1.toString()+" to "+cstr;
+            if(piece2!=null){
+                //이동하려는 위치에 상대방 말이 있는 경우
+                BlackScore+=piece2.Score;
+            }
+        }
+        piece2=piece1;
+
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
+        
         //i,i1 null로 처리하기
         //case1. 빈 공간으로 이동한 경우board(i2,i3)이 null인 경우
         //case2. 상대방 말이 있는 경우 점수를 더해주는 과정 거침
-        ChessPiece piece=board[i][i1];
-        return false;
+        //리턴 값은 "White(Black) move Knight to A7" 이런식으로.
+      
+        return str;
     }
 
     //주혁
@@ -59,7 +86,29 @@ public class ChessBoard {
         //이후 White score와 Black score를 출력
         //White score와 Black score는 각각 WhiteScore와 BlackScore에 저장되어 있음
         //출력
-        
+
+        System.out.println("    A   B   C   D   E   F   G   H  ");
+        for (int i = 1; i < board.length; i++) {
+            System.out.println("  +---+---+---+---+---+---+---+---+");
+            System.out.print(8 - i + " ");
+            for (int j = 1; j < board[i].length; j++) {
+                System.out.print("| ");
+                if (board[j][i] instanceof ChessPiece) System.out.print(board[j][i].toString());
+                else if ((i + j) % 2 != 1) System.out.print("■");
+                else System.out.print(" ");
+                System.out.print(" ");
+            }
+            System.out.print("| ");
+            System.out.print(8 - i + " ");
+            if (i == 1) System.out.print(" White score: " + WhiteScore);
+            if (i == 2) System.out.print(" Black score: " + BlackScore);
+            if (i == 8) System.out.print(" Turn: " + game.turn);
+            System.out.println();
+        }
+        System.out.println("  +---+---+---+---+---+---+---+---+");
+        System.out.println("    A   B   C   D   E   F   G   H  ");
+
+
 
 
     }

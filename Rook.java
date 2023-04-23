@@ -57,7 +57,7 @@ public class Rook extends ChessPiece{
                     }
                 }
             }
-            else {
+            else {//왼쪽으로 이동
                 for(int i=fromX-1;i>toX;i--) {
                     if(ChessBoard.board[i][fromY]!=null) {
                         str="wrong";
