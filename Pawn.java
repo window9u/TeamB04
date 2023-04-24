@@ -37,9 +37,6 @@ public class Pawn extends ChessPiece{
                             //상대방이 없는 경우
                             firstMove=false;
                             str= "move";
-                        }else if(countpart.isWhite==this.isWhite){//비정상
-                            //같은 색의 기물이 있는 경우
-                            str= "cannot move to the same color";
                         }else {//같은편 말이 있는 경우
                             str= "there is a piece in the way";
                         }
@@ -86,12 +83,11 @@ public class Pawn extends ChessPiece{
                             //상대방이 없는 경우
                             firstMove=false;
                             str= "move";
-                        }else if(countpart.isWhite!=this.isWhite){//비정상
-                            //상대방이 있는 경우
-                            str= "there is a piece in the way";
                         }else {//같은편 말이 있는 경우
-                            str= "cannot move to the same color";
+                            str= "there is a piece in the way";
                         }
+                    }else {
+                        str= "there is a piece in the way";
                     }
                 }else {//첫번째 이동이 아니다.(입력오류)
                     str= "It's not first move";
