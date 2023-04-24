@@ -36,6 +36,9 @@ public class Knight extends ChessPiece {
         }
     }
     
-
+    @Override
+    public String getFullname(){
+        return "Knight";
+    }
   
 }

@@ -126,4 +126,9 @@ public class Pawn extends ChessPiece{
             return "p";
         }
     }
+
+    @Override
+    public String getFullname(){
+        return "Pawn";
+    }
 }
