@@ -37,9 +37,9 @@ public class ChessGame {
             if (flag == 0) {// 기물을 다시 선택하는 경우
                 flag=30;
                 if(isWhiteTurn) {
-                    System.out.print("White Re-selecting");
+                    System.out.println("White Re-selecting");
                 }else {
-                    System.out.print("Black Re-selecting");
+                    System.out.println("Black Re-selecting");
                 }
                 continue;
             } else if (flag == -1) {// 긴급종료
