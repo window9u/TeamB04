@@ -23,7 +23,7 @@ public class King extends ChessPiece{
                 str = "move";
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
-                str = "You can't move to the same color";
+                str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
                 str = "eat";
@@ -33,7 +33,7 @@ public class King extends ChessPiece{
                 str = "move";
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
-                str = "You can't move to the same color";
+                str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
                 str = "eat";
@@ -43,7 +43,7 @@ public class King extends ChessPiece{
                 str = "move";
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
-                str = "You can't move to the same color";
+                str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
                 str = "eat";
@@ -63,14 +63,14 @@ public class King extends ChessPiece{
                 str = "move";
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
-                str = "You can't move to the same color";
+                str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
                 str = "eat";
             }
         }else{
             //예외처리(2칸이동 or 이상한 좌표로 이동)
-            str = "You can't move like that";
+            str = "invalid move";
         }
         return str;
     }
