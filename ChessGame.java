@@ -5,7 +5,7 @@ public class ChessGame {
     boolean isWhiteTurn=true;
     int WhiteScore;
     int BlackScore;
-    int turn = 51;// 총 턴
+    int turn = 4;// 총 턴
     int fromX, fromY, toX, toY;
     int flag = 999;
     Scanner scan = new Scanner(System.in);
@@ -57,6 +57,7 @@ public class ChessGame {
             }else {
                 isWhiteTurn=true;
             }
+            turn--;
         }
         printEnding();
     }
@@ -189,9 +190,9 @@ public class ChessGame {
         // ex) White Win!!
         if (isKingdie()) { //king이 죽어서 끝난 경우
             if (isWhiteTurn) { //black 승
-                System.out.println("White King die, Black Win !!");
+                System.out.println("White King dead, Black Win !!");
             } else { //white 승
-                System.out.println("Black King die, White Win!!");
+                System.out.println("Black King dead, White Win!!");
             }
         } else if (isTurnsleft()) { // 턴이 끝나서 종료된 경우
             if (WhiteScore > BlackScore) {
@@ -272,9 +273,6 @@ public class ChessGame {
     // 치수
     public boolean isTurnsleft() { //남은 턴수 계산, 0이되면 true 반환
         if(turn>0){
-            if(flag==888)//back을 입력한 경우
-                return false;
-            turn--;
             return false;
         }
         else{
