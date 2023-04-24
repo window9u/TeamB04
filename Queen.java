@@ -12,23 +12,23 @@ public class Queen extends ChessPiece {
     @Override
     public String canMove(int fromX, int fromY, int toX, int toY) {
         String str = "";
-
+        
 
         // fromX, fromY, toX, toY를 이용하여 움직일 수 있는지 판단
         if (fromX == toX && fromY == toY) {//자기 자신의 위치를 입력했을 때
-            str = "wrong";
+            str = "invalid move";
         } else if (fromX == toX && fromY != toY) {//세로로 이동
             if (fromY < toY) {//위로 이동
                 for (int i = fromY + 1; i < toY; i++) {//이동 경로에 장애물이 있는지 확인
                     if (ChessBoard.board[fromX][i] != null) {
-                        str = "wrong";
+                        str = "there is a piece in the way";
                         break;
                     }
                 }
             } else {//아래로 이동
                 for (int i = fromY - 1; i > toY; i--) {//이동 경로에 장애물이 있는지 확인
                     if (ChessBoard.board[fromX][i] != null) {
-                        str = "wrong";
+                        str = "there is a piece in the way";
                         break;
                     }
                 }
@@ -37,14 +37,14 @@ public class Queen extends ChessPiece {
             if (fromX < toX) {//오른쪽으로 이동
                 for (int i = fromX + 1; i < toX; i++) {//이동 경로에 장애물이 있는지 확인
                     if (ChessBoard.board[i][fromY] != null) {//이동 경로에 장애물이 있으면 이동 불가
-                        str = "wrong";
+                        str = "there is a piece in the way";
                         break;
                     }
                 }
             } else {
                 for (int i = fromX - 1; i > toX; i--) {
                     if (ChessBoard.board[i][fromY] != null) {
-                        str = "wrong";
+                        str = "there is a piece in the way";
                         break;
                     }
                 }

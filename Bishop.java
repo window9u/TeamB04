@@ -13,7 +13,8 @@ public class Bishop extends ChessPiece {
         //이동 불가한 경우
             //제자리 이동인 경우
             if(fromX==toX&&fromY==toY){
-                str="move to different place";
+                //str="move to different place";
+                str="invalid move";
                 return str;
             }
             //대각선 이동이 아닌 경우
@@ -26,7 +27,7 @@ public class Bishop extends ChessPiece {
                     if(toX-fromX>0){ 
                         for(int i=1;i<Math.abs(toX-fromX);i++){ // 진행 경로 중 장애물에 막힌 경우
                             if(ChessBoard.board[fromX+i][fromY+i]!=null){
-                                str="cant go through";
+                                str="there is a piece in the way";
                                 return str;
                             }
                         }
@@ -37,13 +38,13 @@ public class Bishop extends ChessPiece {
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
-                            str="already placed";
+                            str="cannot move to the same color";
                         }
                     }
                     else{ // 진행 경로 중 장애물에 막힌 경우
                         for(int i=1;i<Math.abs(toX-fromX);i++){
                             if(ChessBoard.board[fromX-i][fromY-i]!=null){
-                                str="cant go through";
+                                str="there is a piece in the way";
                                 return str;
                             }
                         }
@@ -54,7 +55,7 @@ public class Bishop extends ChessPiece {
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
-                            str="already placed";
+                            str="cannot move to the same color";
                         }
                     }
                    
@@ -63,7 +64,7 @@ public class Bishop extends ChessPiece {
                     if(toX-fromX>0){ // 진행 경로 중 장애물에 막힌 경우
                         for(int i=1;i<Math.abs(toX-fromX);i++){
                             if(ChessBoard.board[fromX+i][fromY-i]!=null){
-                                str="cant go through";
+                                str="there is a piece in the way";
                                 return str;
                             }
                         }
@@ -74,13 +75,13 @@ public class Bishop extends ChessPiece {
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
-                            str="already placed";
+                            str="cannot move to the same color";
                         }
                     }
                     else{ // 진행 경로 중 장애물에 막힌 경우
                         for(int i=1;i<Math.abs(toX-fromX);i++){
                             if(ChessBoard.board[fromX-i][fromY+i]!=null){
-                                str="cant go through";
+                                str="there is a piece in the way";
                                 return str;
                             }
                         }
@@ -91,7 +92,7 @@ public class Bishop extends ChessPiece {
                             str="eat";
                         }
                         else{// 내 말이 이미 위치한 경우
-                            str="already placed";
+                            str="cannot move to the same color";
                         }
                     }
                 }
