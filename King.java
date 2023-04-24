@@ -85,4 +85,9 @@ public class King extends ChessPiece{
         }
     }
 
+    @Override
+    public String getFullname(){
+        return "King";
+    }
+
 }

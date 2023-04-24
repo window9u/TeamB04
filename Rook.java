@@ -84,4 +84,9 @@ public class Rook extends ChessPiece{
             return "r";
         }
     }
+
+    @Override
+    public String getFullname(){
+        return "Rook";
+    }
 }
