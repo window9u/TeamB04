@@ -5,7 +5,7 @@ public class ChessGame {
     boolean isWhiteTurn=true;
     int WhiteScore;
     int BlackScore;
-    int turn = 4;// 총 턴
+    int turn = 50;// 총 턴
     int fromX, fromY, toX, toY;
     int flag = 999;
     Scanner scan = new Scanner(System.in);
@@ -135,7 +135,6 @@ public class ChessGame {
                 System.out.println("input error");
                 continue;
             }
-
             // str에 "'A~H"+'1~8'문자열 입력 ex) A8"을 입력받아서 fromX:1, fromY:8 대입 (문자열 처리)
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
             // str에 fromX, fromY 추출
