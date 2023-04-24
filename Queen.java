@@ -12,7 +12,7 @@ public class Queen extends ChessPiece {
     @Override
     public String canMove(int fromX, int fromY, int toX, int toY) {
         String str = "";
-        
+        boolean flag = false;
 
         // fromX, fromY, toX, toY를 이용하여 움직일 수 있는지 판단
         if (fromX == toX && fromY == toY) {//자기 자신의 위치를 입력했을 때
@@ -22,12 +22,14 @@ public class Queen extends ChessPiece {
                 for (int i = fromY + 1; i < toY; i++) {//이동 경로에 장애물이 있는지 확인
                     if (ChessBoard.board[fromX][i] != null) {
                         str = "there is a piece in the way";
+                        flag = true;
                         break;
                     }
                 }
             } else {//아래로 이동
                 for (int i = fromY - 1; i > toY; i--) {//이동 경로에 장애물이 있는지 확인
                     if (ChessBoard.board[fromX][i] != null) {
+                        flag = true;
                         str = "there is a piece in the way";
                         break;
                     }
@@ -37,6 +39,7 @@ public class Queen extends ChessPiece {
             if (fromX < toX) {//오른쪽으로 이동
                 for (int i = fromX + 1; i < toX; i++) {//이동 경로에 장애물이 있는지 확인
                     if (ChessBoard.board[i][fromY] != null) {//이동 경로에 장애물이 있으면 이동 불가
+                        flag = true;
                         str = "there is a piece in the way";
                         break;
                     }
@@ -44,6 +47,7 @@ public class Queen extends ChessPiece {
             } else {
                 for (int i = fromX - 1; i > toX; i--) {
                     if (ChessBoard.board[i][fromY] != null) {
+                        flag = true;
                         str = "there is a piece in the way";
                         break;
                     }
@@ -54,14 +58,16 @@ public class Queen extends ChessPiece {
                 if (fromX < toX && fromY < toY) {
                     for (int i = 1; i < toX - fromX; i++) {
                         if (ChessBoard.board[fromX + i][fromY + i] != null) {
-                            str = "wrong";
+                            flag = true;
+                            str="there is a piece in the way";
                             break;
                         }
                     }
                 } else if (fromX > toX && fromY > toY) {
                     for (int i = 1; i < fromX - toX; i++) {
                         if (ChessBoard.board[fromX - i][fromY - i] != null) {
-                            str = "wrong";
+                            str="there is a piece in the way";
+                            flag = true;
                             break;
                         }
                     }
@@ -71,28 +77,33 @@ public class Queen extends ChessPiece {
                 if (fromX < toX) {
                     for (int i = 1; i < toX - fromX; i++) {
                         if (ChessBoard.board[fromX + i][fromY - i] != null) {
-                            str = "wrong";
+                            str="there is a piece in the way";
+                            flag = true;
                             break;
                         }
                     }
                 } else {
                     for (int i = 1; i < fromX - toX; i++) {
                         if (ChessBoard.board[fromX - i][fromY + i] != null) {
-                            str = "wrong";
+                            flag = true;
+                            str="there is a piece in the way";
                             break;
                         }
                     }
                 }
+            }else {
+                flag= true;
+                str = "invalid move";
             }
         }
 
-        if (str != "wrong") {
+        if (flag==false) {
             if (ChessBoard.board[toX][toY] == null) {//이동 경로에 장애물이 없으면 이동
                 str = "move";
             } else if (ChessBoard.board[toX][toY].isWhite != ChessBoard.board[fromX][fromY].isWhite) {//이동 경로에 장애물이 있고 적인 기물이 있으면 먹기
                 str = "eat";
             } else {//이동 경로에 장애물이 있고 아군 기물이 있으면 이동 불가
-                str = "wrong";
+                str="there is a piece in the way";
             }
         }
         return str;//이동 불가

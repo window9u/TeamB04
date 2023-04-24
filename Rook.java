@@ -69,7 +69,7 @@ public class Rook extends ChessPiece{
                     }
                 }
             }
-            if(flag) {//이동 경로에 장애물이 없으면 이동
+            if(flag==false) {//이동 경로에 장애물이 없으면 이동
                 if(ChessBoard.board[toX][toY]==null) {
                     str="move";
                 }
