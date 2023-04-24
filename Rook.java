@@ -48,7 +48,8 @@ public class Rook extends ChessPiece{
                     str="eat";
                 }
                 else {//이동 경로에 장애물이 있고 아군 기물이 있으면 이동 불가
-                        str="there is a piece in the way";
+                    str="there is a piece in the way";
+                    flag=true;
                 }
             }
         }
@@ -57,6 +58,7 @@ public class Rook extends ChessPiece{
                 for(int i=fromX+1;i<toX;i++) {//이동 경로에 장애물이 있는지 확인
                     if(ChessBoard.board[i][fromY]!=null) {//이동 경로에 장애물이 있으면 이동 불가
                         str="there is a piece in the way";
+                        flag=true;
                         break;
                     }
                 }
@@ -65,11 +67,12 @@ public class Rook extends ChessPiece{
                 for(int i=fromX-1;i>toX;i--) {
                     if(ChessBoard.board[i][fromY]!=null) {
                         str="there is a piece in the way";
+                        flag=true;
                         break;
                     }
                 }
             }
-            if(flag) {//이동 경로에 장애물이 없으면 이동
+            if(flag==false) {//이동 경로에 장애물이 없으면 이동
                 if(ChessBoard.board[toX][toY]==null) {
                     str="move";
                 }
