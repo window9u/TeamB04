@@ -112,4 +112,9 @@ public class Queen extends ChessPiece {
             return "q";
         }
     }
+
+    @Override
+    public String getFullname(){
+        return "Queen";
+    }
 }

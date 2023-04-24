@@ -111,4 +111,9 @@ public class Bishop extends ChessPiece {
         }
     }
 
+
+    @Override
+    public String getFullname(){
+        return "Bishop";
+    }
 }

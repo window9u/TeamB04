@@ -18,17 +18,18 @@ public class ChessBoard {
         String str = "";
         ChessPiece piece1 = board[i][i1];
         ChessPiece piece2 = board[i2][i3];
-        String cstr = String.valueOf((char) (65 + i2 - 1)) + i3;
+        String cstr1 = String.valueOf((char) (65 + i2 - 1)) + i3;
+        String cstr2 = String.valueOf((char) (65 + i - 1)) + i1;
         if (piece1.isWhite) {
             //White 말 이동하는 경우
-            str = "White move " + piece1.toString() + " to " + cstr;
+            str = "White moved " + piece1.getFullname() + " from " + cstr2 + " to "+cstr1;
             if (piece2 != null) {
                 //이동하려는 위치에 상대방 말이 있는 경우
                 game.WhiteScore += piece2.Score;
             }
         } else {
             //Black 말 이동하는 경우
-            str = "Black move " + piece1.toString() + " to " + cstr;
+            str = "Black moved " + piece1.getFullname() + " from " + cstr2 + " to "+cstr1;
             if (piece2 != null) {
                 //이동하려는 위치에 상대방 말이 있는 경우
                 game.BlackScore += piece2.Score;
