@@ -32,7 +32,7 @@ public class Pawn extends ChessPiece{
                 }
             }else if(fromY+2==toY&&toX==fromX){//첫 이동(두칸 이동)
                 if(firstMove){//첫번째 이동인 경우
-                    if(ChessBoard.board[toX][toY+1]==null){//이동경로에 장애물 체크
+                    if(ChessBoard.board[fromX][fromY+1]==null){//이동경로에 장애물 체크
                         if(countpart==null){//정상
                             //상대방이 없는 경우
                             firstMove=false;
@@ -81,7 +81,7 @@ public class Pawn extends ChessPiece{
                 }
             }else if(fromY-2==toY&&toX==fromX){//첫 이동(두칸 이동)
                 if(firstMove){//첫번째 이동인 경우
-                    if(ChessBoard.board[toX][toY+1]==null){//이동경로에 장애물 체크
+                    if(ChessBoard.board[fromX][fromY-1]==null){//이동경로에 장애물 체크
                         if(countpart==null){//정상
                             //상대방이 없는 경우
                             firstMove=false;
