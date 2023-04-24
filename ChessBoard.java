@@ -19,7 +19,7 @@ public class ChessBoard {
         ChessPiece piece1 = board[i][i1];
         ChessPiece piece2 = board[i2][i3];
         String cstr = String.valueOf((char) (65 + i2 - 1)) + i3;
-        if (piece1.isWhite()) {
+        if (piece1.isWhite) {
             //White 말 이동하는 경우
             str = "White move " + piece1.toString() + " to " + cstr;
             if (piece2 != null) {
