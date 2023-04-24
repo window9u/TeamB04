@@ -22,12 +22,16 @@ public class ChessGame {
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
         while (!isKingdie() && !isTurnsleft()) {
             // 보드 출력
-            Chessboard.printBoard();
+            if(flag!=888){
+                Chessboard.printBoard();
+                System.out.println(printMessage);
+            }else{
+                flag=999;//flag 초기화
+            }
             // 보드 밑에 출력문 출력.
             // printMessage 함수에서 전역변수로 변경.
             // 기존의 printMessage()의 기능은 Chessboard.Move()에서 문자열 리턴.
             // 초기값은 Game Start!!
-            System.out.println(printMessage);
             // 사용자 입력 받기
             inputFrom(isWhiteTurn);
             if (flag == -1) {// 긴급종료
@@ -35,7 +39,7 @@ public class ChessGame {
             }
             inputTo(isWhiteTurn);
             if (flag == 0) {// 기물을 다시 선택하는 경우
-                flag=30;
+                flag=888;//flag 변경(보드 출력 안함, isTurnleft()
                 if(isWhiteTurn) {
                     System.out.println("White Re-selecting");
                 }else {
@@ -268,7 +272,7 @@ public class ChessGame {
     // 치수
     public boolean isTurnsleft() { //남은 턴수 계산, 0이되면 true 반환
         if(turn>0){
-            if(flag==30)
+            if(flag==888)//back을 입력한 경우
                 return false;
             turn--;
             return false;
