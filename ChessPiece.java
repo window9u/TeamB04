@@ -8,6 +8,8 @@ abstract class ChessPiece {
         this.ChessBoard=board;
     }
 
+    public abstract String getFullname();
+
     public boolean isWhite() {
         return isWhite;
     }
