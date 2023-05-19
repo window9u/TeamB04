@@ -26,6 +26,11 @@ public class Knight extends ChessPiece {
         return str;
     }
 
+    @Override
+    public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        return false;
+    }
+
     // toString을 구현
     @Override
     public String toString() {

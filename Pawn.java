@@ -111,7 +111,12 @@ public class Pawn extends ChessPiece{
         }
         return str;
     }
-    
+
+    @Override
+    public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        return false;
+    }
+
     @Override
     public String toString() {
         // Return the string representation of a pawn.

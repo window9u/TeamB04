@@ -108,6 +108,11 @@ public class Queen extends ChessPiece {
         }
         return str;//이동 불가
     }
+
+    @Override
+    public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        return false;
+    }
     // 움직일 수 있는 경우, 이동하려는 위치에 기물이 없는 경우, "move" 리턴
     // 움직일 수 있는 경우, 이동하려는 위치에 기물이 없는 경우, 이동하려는 위치에 기물이 있는 경우, 적인 경우, "eat" 리턴
     // 움직일 수 있는 경우, 이동하려는 위치에 기물이 없는 경우, 이동하려는 위치에 기물이 있는 경우, 아군인 경우, "wrong" 리턴

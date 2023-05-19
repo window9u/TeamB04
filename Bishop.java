@@ -104,6 +104,11 @@ public class Bishop extends ChessPiece {
     }
 
     @Override
+    public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        return false;
+    }
+
+    @Override
     public String toString() {
         if (isWhite) {
             return "B";

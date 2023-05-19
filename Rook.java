@@ -1,4 +1,7 @@
 public class Rook extends ChessPiece {
+    boolean isFirstMove=true;//첫 움직임인지 확인
+    //만약 이동했을 경우 isFirstMove를 false로 바꿔준다.
+
     public Rook(boolean isWhite, ChessBoard board) {
         super(isWhite, board);
         //점수 초기화
@@ -70,6 +73,11 @@ public class Rook extends ChessPiece {
             }
         }
         return str;
+    }
+
+    @Override
+    public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        return false;
     }
 
     @Override

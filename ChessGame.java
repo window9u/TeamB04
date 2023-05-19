@@ -7,7 +7,14 @@ public class ChessGame {
     int BlackScore;
     int turn = 50;// 총 턴
     int fromX, fromY, toX, toY;
-    int flag = 999;
+    int escapeFlag = 999;
+    //999: 기본상태
+    //888: 기물을 다시 선택하는 경우(보드 출력 안함, isTurnleft())
+    //-1: 긴급종료
+    //0: 기물을 다시 선택하는 경우
+    boolean castlingFlag = false;
+    int WhiteKingX, WhiteKingY, BlackKingX, BlackKingY;// 킹의 위치
+    //isKingDie()에서 위치 동기화해줌.
     Scanner scan = new Scanner(System.in);
     String printMessage = "Game Start!!";
 
@@ -22,11 +29,12 @@ public class ChessGame {
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
         while (!isKingdie() && !isTurnsleft()) {
             // 보드 출력
-            if(flag!=888){
+            if(escapeFlag !=888){
                 Chessboard.printBoard();
+                printMessage+=isCheck();//체크확인 문자열 추가
                 System.out.println(printMessage);
             }else{
-                flag=999;//flag 초기화
+                escapeFlag =999;//flag 초기화
             }
             // 보드 밑에 출력문 출력.
             // printMessage 함수에서 전역변수로 변경.
@@ -34,23 +42,36 @@ public class ChessGame {
             // 초기값은 Game Start!!
             // 사용자 입력 받기
             inputFrom(isWhiteTurn);
-            if (flag == -1) {// 긴급종료
+            if (escapeFlag == -1) {// 긴급종료
                 break;
             }
-            inputTo(isWhiteTurn);
-            if (flag == 0) {// 기물을 다시 선택하는 경우
-                flag=888;//flag 변경(보드 출력 안함, isTurnleft()
+            if(castlingFlag) {
+                // 캐슬링의 경우 toX, toY 입력받지 않음. 따라서 Chessboard.Move()를 사용하지 않는다.
+                // 그래서 printMessage를 직접 설정해줌.
+                // 좌표 설정은 this.canCastle()에서 해줌.
+                castlingFlag = false;//flag 초기화
                 if(isWhiteTurn) {
-                    System.out.println("White Re-selecting");
+                    printMessage = "White Castle";
                 }else {
-                    System.out.println("Black Re-selecting");
+                    printMessage = "Black Castle";
                 }
-                continue;
-            } else if (flag == -1) {// 긴급종료
-                break;
+            }else{// 캐슬링이 아닌 경우
+                inputTo(isWhiteTurn);
+                if (escapeFlag == 0) {// 기물을 다시 선택하는 경우
+                    escapeFlag =888;//flag 변경(보드 출력 안함, isTurnleft()
+                    if(isWhiteTurn) {
+                        System.out.println("White Re-selecting");
+                    }else {
+                        System.out.println("Black Re-selecting");
+                    }
+                    continue;
+                } else if (escapeFlag == -1) {// 긴급종료
+                    break;
+                }
+                // 이동
+                printMessage = Chessboard.Move(fromX, fromY, toX, toY);
             }
-            // 이동
-            printMessage = Chessboard.Move(fromX, fromY, toX, toY);
+
             // 턴 바꾸기
             if(isWhiteTurn==true) {
                 isWhiteTurn= false;
@@ -97,7 +118,7 @@ public class ChessGame {
             String inputstr = scan.nextLine();
             // 예외처리
             if(inputstr.equals("quit")) {
-                this.flag = -1;
+                this.escapeFlag = -1;
                 break;
             } else if(inputstr.length() == 2 && inputstr.charAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
                     && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
@@ -105,12 +126,12 @@ public class ChessGame {
                 this.fromX = inputstr.charAt(0) - 'A' + 1;
                 this.fromY = inputstr.charAt(1) - '0';
                 //디버깅용
-                if(pieceColor(fromX,fromY)==0){//비어있는 경우
+                if (pieceColor(fromX, fromY) == 0) {//비어있는 경우
                     System.out.println("There is no piece");
-                } else if(isWhiteTurn == true) {
+                } else if (isWhiteTurn == true) {
                     // 백 차례일 때 백의 말을 선택한 경우
-                    if(pieceColor(fromX, fromY) == 1){
-                        System.out.println("White Selected "+Chessboard.board[fromX][fromY].getFullname());
+                    if (pieceColor(fromX, fromY) == 1) {
+                        System.out.println("White Selected " + Chessboard.board[fromX][fromY].getFullname());
                         break;
                     }
                     // 백 차례일 때 흑의 말을 선택하거나 선택한 좌표가 비어있는 경우
@@ -120,15 +141,25 @@ public class ChessGame {
                     }
                 } else {
                     // 흑 차례일 때 백의 말을 선택한 경우
-                    if(pieceColor(fromX, fromY) == -1) {
-                        System.out.println("Black Selected "+Chessboard.board[fromX][fromY].getFullname());
+                    if (pieceColor(fromX, fromY) == -1) {
+                        System.out.println("Black Selected " + Chessboard.board[fromX][fromY].getFullname());
                         break;
                     }
                     // 흑 차례일 때 백의 말을 선택하거나 선택한 좌표가 비어있는 경우
-                    else if(pieceColor(fromX, fromY) == 1 || pieceColor(fromX, fromY) == 0) {
+                    else if (pieceColor(fromX, fromY) == 1 || pieceColor(fromX, fromY) == 0) {
                         System.out.println("Selected opponent's piece");
                         continue;
                     }
+                }
+            } else if(inputstr.length()==2&&(inputstr.charAt(0)=='Q'||inputstr.charAt(0)=='K')&&inputstr.charAt(1)=='C'){
+                //퀸,킹 캐슬
+                //캐슬링이 안되는 경우 'Failed to castle' 출력 후 재입력 받기.(밑에 input error) 참고할 것.
+                if(canCastle(inputstr.charAt(0))==false){//캐슬링이 안되는 경우
+                    System.out.println("Failed to castle");
+                    continue;
+                } else{//캐슬링이 되는 경우
+                    this.castlingFlag=true;
+                    break;
                 }
             } else {
                 //재입력
@@ -156,10 +187,10 @@ public class ChessGame {
             String inputstr = scan.nextLine();
             // 예외처리: 잘못된 문자열 입력 시 오류 메세지 출력 후 재입력 받음
             if (inputstr.equals("quit")) {// 긴급종료
-                this.flag = -1;
+                this.escapeFlag = -1;
                 break;
             } else if (inputstr.equals("back")) { // 기물을 다시 선택하는 경우
-                this.flag = 0;
+                this.escapeFlag = 0;
                 break;
             } else if (inputstr.length() == 2 && inputstr.charAt(0) >= 'A' && inputstr.charAt(0) <= 'H'
                     && inputstr.charAt(1) >= '1' && inputstr.charAt(1) <= '8') {
@@ -252,6 +283,13 @@ public class ChessGame {
                         continue;
                     }
                     if (Chessboard.board[i][j] instanceof King) {
+                        if(Chessboard.board[i][j].isWhite){//킹들 위치 동기화
+                            WhiteKingX= i;
+                            WhiteKingY= j;
+                        }else{
+                            BlackKingX= i;
+                            BlackKingY= j;
+                        }
                         k++;
                     }
                 }
@@ -279,4 +317,33 @@ public class ChessGame {
         }
     }
 
+    public String isCheck(){
+        //White King Check
+        //Black King Check 리턴
+        //만약 동시 체크면 둘다 리턴(White King Check\nBlack King Check) 리턴
+        //체크가 아니면 빈 문자열 리턴
+        //각 체스 기물의 canCheck() 함수를 호출해서 체크인지 확인
+        String str="";
+
+        return str;
+    }
+    public boolean canCastle(char KorQ){
+        //캐슬링 가능 여부 리턴
+        //캐슬링 가능하면 true, 아니면 false
+        //캐슬링이 가능하다면, ChessBoard의 기물 위치까지 바꾸기(Move()를 사용하지 않을 것이기 떄문에.)
+        //즉 ChessBoard의 기물 위치를 바꾸고, King, Rook의 isFisrtMove를 false로 바꾸기
+        //King, Rook의 isFisrtMove 활용하기.
+        if(isWhiteTurn) {//백 차례일 때
+            if (KorQ == 'Q') {
+//
+            } else{
+//
+            }
+        }else {//흑 차례일 때
+            if (KorQ == 'Q') {//퀸 캐슬
+            }else{//킹 캐슬
+            }
+        }
+        return false;
+    }
 }
