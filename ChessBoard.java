@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class ChessBoard {
     private ChessGame game;
     //9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
@@ -37,6 +39,21 @@ public class ChessBoard {
         }
         board[i2][i3] = piece1;
         board[i][i1] = null;
+        if(piece1.getFullname().equals("Pawn")){//폰 승진
+            //str return까지 "White pawn promoted to Queen" 이런식으로 하기.
+            //밑의 inputPawnPromoteTo() 함수를 이용해서 폰이 무엇으로 승진할지 입력받기.
+            //inputPawnPromoteTo() 함수 완성하기.
+            if(piece1.isWhite&&i3==8){//흰색 폰 승진
+                if(inputPawnPromoteTo()=='q') {//예시
+                    board[i2][i3] = new Queen(true, this);
+                    return str+" White pawn promoted to Queen";
+                }else if(inputPawnPromoteTo()=='b') {
+                    board[i2][i3] = new Bishop(true, this);
+                    return str + " White pawn promoted to Bishop";
+                }
+            }else{//폰이 검은색인 경우
+            }
+        }
         //해당 좌표로 이동. 해당 움직임은 올바르게 검증되었다고 가정(전처리 후임)
 
         //i,i1 null로 처리하기
@@ -45,6 +62,24 @@ public class ChessBoard {
         //리턴 값은 "White(Black) move Knight to A7" 이런식으로.
 
         return str;
+    }
+
+    public char inputPawnPromoteTo(){
+        //폰이 무엇으로 변할지 입력받는 함수
+        //제대로 입력받을 때까지 반복
+        //Q,B,R,N 중 선택 가능
+        char c=' ';
+        Scanner sc=new Scanner(System.in);
+        String str="";
+        while (!(str.length()==1&&str.charAt(0)=='q'||str.charAt(0)=='b'||str.charAt(0)=='r'||str.charAt(0)=='n')){
+            System.out.print("promote pawn to: ");
+            str=sc.nextLine();
+            if(str.length()==1&&str.charAt(0)=='q'||str.charAt(0)=='b'||str.charAt(0)=='r'||str.charAt(0)=='n')
+                c=str.charAt(0);
+            else
+                System.out.println("input error");
+        }
+        return c;
     }
 
     //주혁

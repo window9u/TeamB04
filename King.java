@@ -1,6 +1,8 @@
 //재하
 public class King extends ChessPiece{
     //Rook과 같은 방식으로 점수 초기화 및 canMove() 메소드 구현
+    boolean isFirstMove=true;//첫 움직임인지 확인
+    //만약 이동했을 경우 isFirstMove를 false로 바꿔준다.
     public King(boolean isWhite, ChessBoard board) {
         super(isWhite,board);
         //점수 초기화
@@ -74,6 +76,12 @@ public class King extends ChessPiece{
         }
         return str;
     }
+
+    @Override
+    public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        return false;
+    }
+
     //toString() 메소드 구현
     @Override
     public String toString() {
