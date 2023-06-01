@@ -111,6 +111,11 @@ public class Queen extends ChessPiece {
 
     @Override
     public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        //인자로 받아온 pieceX, pieceY, kingX, kingY를 canMove에 대입 후 반환값을 비교
+        String s=canMove(pieceX,pieceY,kingX,kingY);
+        if(s=="eat"){
+            return true;
+        }
         return false;
     }
     // 움직일 수 있는 경우, 이동하려는 위치에 기물이 없는 경우, "move" 리턴

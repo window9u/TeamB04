@@ -255,22 +255,22 @@ public class ChessGame {
             Chessboard.board[i][7] = new Pawn(false, this.Chessboard);
         }
 
-        Chessboard.board[1][1] = new Rook(true, this.Chessboard);
-        Chessboard.board[8][1] = new Rook(true, this.Chessboard);
-        Chessboard.board[1][8] = new Rook(false, this.Chessboard);
-        Chessboard.board[8][8] = new Rook(false, this.Chessboard);
-        Chessboard.board[2][1] = new Knight(true, this.Chessboard);
-        Chessboard.board[7][1] = new Knight(true, this.Chessboard);
-        Chessboard.board[2][8] = new Knight(false, this.Chessboard);
-        Chessboard.board[7][8] = new Knight(false, this.Chessboard);
-        Chessboard.board[3][1] = new Bishop(true, this.Chessboard);
-        Chessboard.board[6][1] = new Bishop(true, this.Chessboard);
-        Chessboard.board[3][8] = new Bishop(false, this.Chessboard);
-        Chessboard.board[6][8] = new Bishop(false, this.Chessboard);
-        Chessboard.board[4][1] = new Queen(true, this.Chessboard);
-        Chessboard.board[5][1] = new King(true, this.Chessboard);
-        Chessboard.board[4][8] = new Queen(false, this.Chessboard);
-        Chessboard.board[5][8] = new King(false, this.Chessboard);
+         Chessboard.board[1][1] = new Rook(true, this.Chessboard);
+         Chessboard.board[8][1] = new Rook(true, this.Chessboard);
+         Chessboard.board[1][8] = new Rook(false, this.Chessboard);
+         Chessboard.board[8][8] = new Rook(false, this.Chessboard);
+         Chessboard.board[2][1] = new Knight(true, this.Chessboard);
+         Chessboard.board[7][1] = new Knight(true, this.Chessboard);
+         Chessboard.board[2][8] = new Knight(false, this.Chessboard);
+         Chessboard.board[7][8] = new Knight(false, this.Chessboard);
+         Chessboard.board[3][1] = new Bishop(true, this.Chessboard);
+         Chessboard.board[6][1] = new Bishop(true, this.Chessboard);
+         Chessboard.board[3][8] = new Bishop(false, this.Chessboard);
+         Chessboard.board[6][8] = new Bishop(false, this.Chessboard);
+         Chessboard.board[4][1] = new Queen(true, this.Chessboard);
+         Chessboard.board[5][1] = new King(true, this.Chessboard);
+         Chessboard.board[4][8] = new Queen(false, this.Chessboard);
+         Chessboard.board[5][8] = new King(false, this.Chessboard);
     }
 
 
@@ -318,13 +318,32 @@ public class ChessGame {
     }
 
     public String isCheck(){
-        //White King Check
-        //Black King Check 리턴
+        //White King Checked
+        //Black King Checked 리턴
         //만약 동시 체크면 둘다 리턴(White King Check\nBlack King Check) 리턴
         //체크가 아니면 빈 문자열 리턴
         //각 체스 기물의 canCheck() 함수를 호출해서 체크인지 확인
-        String str="";
 
+        //******** 어떤 기물에 의해서 Checked 되었는지 표기함. ********* 
+        //개행문자 필요해서 str에 기본적으로 개행문자 넣어놓음.
+        String str="\n";
+        for(int i=1;i<9;i++){
+            for(int j=1;j<9;j++){
+                if(Chessboard.board[i][j]!=null){
+                    if(Chessboard.board[i][j].isWhite){
+                        if(Chessboard.board[i][j].canCheck(i, j, BlackKingX, BlackKingY)){
+                            str+="Black King Checked by White "+Chessboard.board[i][j].getFullname()+"\n";
+                        }
+                    }
+                    else{
+                        if(Chessboard.board[i][j].canCheck(i, j, WhiteKingX, WhiteKingY)){
+                            str+="White King Checked by Black "+Chessboard.board[i][j].getFullname()+"\n";
+                        }
+                    }
+                }
+            }
+        }
+        
         return str;
     }
     public boolean canCastle(char KorQ){
