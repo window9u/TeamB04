@@ -28,12 +28,12 @@ public class ChessGame {
         // 체스 게임 시작
         // 킹이 죽거나 무승부(턴수 제한이 아니면)
         while (!isKingdie() && !isTurnsleft()) {
-            // 보드 출력
-            if(escapeFlag !=888){
+            // 보드 출력 다음 조건문은 기물을 다시선택하는 경우 보드를 출력하지 않기 위함.
+            if(escapeFlag !=888){//기본 경우
                 Chessboard.printBoard();
                 printMessage+=isCheck();//체크확인 문자열 추가
                 System.out.println(printMessage);
-            }else{
+            }else{//888인 경우
                 escapeFlag =999;//flag 초기화
             }
             // 보드 밑에 출력문 출력.
