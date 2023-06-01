@@ -51,9 +51,9 @@ public class ChessGame {
                 // 좌표 설정은 this.canCastle()에서 해줌.
                 castlingFlag = false;//flag 초기화
                 if(isWhiteTurn) {
-                    printMessage = "White Castle";
+                    printMessage = "White Castling\n";
                 }else {
-                    printMessage = "Black Castle";
+                    printMessage = "Black Castling\n";
                 }
             }else{// 캐슬링이 아닌 경우
                 inputTo(isWhiteTurn);
@@ -152,7 +152,7 @@ public class ChessGame {
                     }
                 }
             } else if(inputstr.length()==2&&(inputstr.charAt(0)=='Q'||inputstr.charAt(0)=='K')&&inputstr.charAt(1)=='C'){
-                //퀸,킹 캐슬
+                //퀸,킹 캐슬 KC QC
                 //캐슬링이 안되는 경우 'Failed to castle' 출력 후 재입력 받기.(밑에 input error) 참고할 것.
                 if(canCastle(inputstr.charAt(0))==false){//캐슬링이 안되는 경우
                     System.out.println("Failed to castle");
@@ -255,22 +255,22 @@ public class ChessGame {
             Chessboard.board[i][7] = new Pawn(false, this.Chessboard);
         }
 
-         Chessboard.board[1][1] = new Rook(true, this.Chessboard);
-         Chessboard.board[8][1] = new Rook(true, this.Chessboard);
-         Chessboard.board[1][8] = new Rook(false, this.Chessboard);
-         Chessboard.board[8][8] = new Rook(false, this.Chessboard);
-         Chessboard.board[2][1] = new Knight(true, this.Chessboard);
-         Chessboard.board[7][1] = new Knight(true, this.Chessboard);
-         Chessboard.board[2][8] = new Knight(false, this.Chessboard);
-         Chessboard.board[7][8] = new Knight(false, this.Chessboard);
-         Chessboard.board[3][1] = new Bishop(true, this.Chessboard);
-         Chessboard.board[6][1] = new Bishop(true, this.Chessboard);
-         Chessboard.board[3][8] = new Bishop(false, this.Chessboard);
-         Chessboard.board[6][8] = new Bishop(false, this.Chessboard);
-         Chessboard.board[4][1] = new Queen(true, this.Chessboard);
-         Chessboard.board[5][1] = new King(true, this.Chessboard);
-         Chessboard.board[4][8] = new Queen(false, this.Chessboard);
-         Chessboard.board[5][8] = new King(false, this.Chessboard);
+        Chessboard.board[1][1] = new Rook(true, this.Chessboard);
+        Chessboard.board[8][1] = new Rook(true, this.Chessboard);
+        Chessboard.board[1][8] = new Rook(false, this.Chessboard);
+        Chessboard.board[8][8] = new Rook(false, this.Chessboard);
+        Chessboard.board[2][1] = new Knight(true, this.Chessboard);
+        Chessboard.board[7][1] = new Knight(true, this.Chessboard);
+        Chessboard.board[2][8] = new Knight(false, this.Chessboard);
+        Chessboard.board[7][8] = new Knight(false, this.Chessboard);
+        Chessboard.board[3][1] = new Bishop(true, this.Chessboard);
+        Chessboard.board[6][1] = new Bishop(true, this.Chessboard);
+        Chessboard.board[3][8] = new Bishop(false, this.Chessboard);
+        Chessboard.board[6][8] = new Bishop(false, this.Chessboard);
+        Chessboard.board[4][1] = new Queen(true, this.Chessboard);
+        Chessboard.board[5][1] = new King(true, this.Chessboard);
+        Chessboard.board[4][8] = new Queen(false, this.Chessboard);
+        Chessboard.board[5][8] = new King(false, this.Chessboard);
     }
 
 
@@ -353,14 +353,114 @@ public class ChessGame {
         //즉 ChessBoard의 기물 위치를 바꾸고, King, Rook의 isFisrtMove를 false로 바꾸기
         //King, Rook의 isFisrtMove 활용하기.
         if(isWhiteTurn) {//백 차례일 때
-            if (KorQ == 'Q') {
-//
-            } else{
-//
+            if (KorQ == 'Q') { //QC경우
+                //킹과 룩 사이 기물들이 없는 지 확인
+                for(int i=2;i<5;i++){
+                    if(Chessboard.board[i][1]!=null){
+                        //기물이 있다면 false 리턴
+                        return false;
+                    }
+                }
+                if((Chessboard.board[1][1] instanceof Rook)&&(Chessboard.board[5][1] instanceof King)){ //A1과 E1이 룩과 킹 인지 확인
+                    Rook r=(Rook) Chessboard.board[1][1];
+                    King k=(King) Chessboard.board[5][1];
+                    if(r.isFirstMove&&k.isFirstMove){
+                        //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
+                        r.isFirstMove=false;
+                        k.isFirstMove=false;
+                        //룩과 킹 이동
+                        Chessboard.board[4][1]=r;
+                        Chessboard.board[3][1]=k;
+                        //기존 자리 null로 변경
+                        Chessboard.board[1][1]=null;
+                        Chessboard.board[5][1]=null;
+                        //true 리턴
+                        return true;
+                    }
+                    
+                }
+
+            } else{//KC
+                 //킹과 룩 사이 기물들이 없는 지 확인
+                 for(int i=6;i<8;i++){
+                    if(Chessboard.board[i][1]!=null){
+                        //기물이 있다면 false 리턴
+                        return false;
+                    }
+                }
+                if((Chessboard.board[8][1] instanceof Rook)&&(Chessboard.board[5][1] instanceof King)){ //H1과 E1이 룩과 킹 인지 확인
+                    Rook r=(Rook) Chessboard.board[1][1];
+                    King k=(King) Chessboard.board[5][1];
+                    if(r.isFirstMove&&k.isFirstMove){
+                        //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
+                        r.isFirstMove=false;
+                        k.isFirstMove=false;
+                        //룩과 킹 이동
+                        Chessboard.board[6][1]=r;
+                        Chessboard.board[7][1]=k;
+                        //기존 자리 null로 변경
+                        Chessboard.board[8][1]=null;
+                        Chessboard.board[5][1]=null;
+                        //true 리턴
+                        return true;
+                    }
+                    
+                }
+
             }
         }else {//흑 차례일 때
             if (KorQ == 'Q') {//퀸 캐슬
+                //킹과 룩 사이 기물들이 없는 지 확인
+                for(int i=2;i<5;i++){
+                    if(Chessboard.board[i][8]!=null){
+                        //기물이 있다면 false 리턴
+                        return false;
+                    }
+                }
+                if((Chessboard.board[1][8] instanceof Rook)&&(Chessboard.board[5][8] instanceof King)){ //A1과 E1이 룩과 킹 인지 확인
+                    Rook r=(Rook) Chessboard.board[1][8];
+                    King k=(King) Chessboard.board[5][8];
+                    if(r.isFirstMove&&k.isFirstMove){
+                        //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
+                        r.isFirstMove=false;
+                        k.isFirstMove=false;
+                        //룩과 킹 이동
+                        Chessboard.board[4][8]=r;
+                        Chessboard.board[3][8]=k;
+                        //기존 자리 null로 변경
+                        Chessboard.board[1][8]=null;
+                        Chessboard.board[5][8]=null;
+                        //true 리턴
+                        return true;
+                    }
+                    
+                }
             }else{//킹 캐슬
+                //킹과 룩 사이 기물들이 없는 지 확인
+                for(int i=6;i<8;i++){
+                    if(Chessboard.board[i][8]!=null){
+                        //기물이 있다면 false 리턴
+                        return false;
+                    }
+                }
+                if((Chessboard.board[8][8] instanceof Rook)&&(Chessboard.board[5][8] instanceof King)){ //H1과 E1이 룩과 킹 인지 확인
+                    Rook r=(Rook) Chessboard.board[1][8];
+                    King k=(King) Chessboard.board[5][8];
+                    if(r.isFirstMove&&k.isFirstMove){
+                        //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
+                        r.isFirstMove=false;
+                        k.isFirstMove=false;
+                        //룩과 킹 이동
+                        Chessboard.board[6][8]=r;
+                        Chessboard.board[7][8]=k;
+                        //기존 자리 null로 변경
+                        Chessboard.board[8][8]=null;
+                        Chessboard.board[5][8]=null;
+                        //true 리턴
+                        return true;
+                    }
+                    
+                }
             }
         }
         return false;
