@@ -47,6 +47,7 @@ public class Rook extends ChessPiece {
                     if(ChessBoard.board[i][fromY]!=null){
                         flag=true;
                         str="there is a piece in the way";
+                        flag=true;
                         break;
                     }
                 }
@@ -55,6 +56,7 @@ public class Rook extends ChessPiece {
                     if(ChessBoard.board[i][fromY]!=null){
                         flag=true;
                         str="there is a piece in the way";
+                        flag=true;
                         break;
                     }
                 }
@@ -77,6 +79,11 @@ public class Rook extends ChessPiece {
 
     @Override
     public boolean canCheck(int pieceX, int pieceY, int kingX, int kingY) {
+        //인자로 받아온 pieceX, pieceY, kingX, kingY를 canMove에 대입 후 반환값을 비교
+        String s=canMove(pieceX,pieceY,kingX,kingY);
+        if(s=="eat"){
+            return true;
+        }
         return false;
     }
 
