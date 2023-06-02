@@ -56,9 +56,6 @@ public class ChessBoard {
                     }else if(c =='r') {
                         board[i2][i3] = new Rook(true, this);
                         return " White pawn promoted to Rook";
-                    }else if(c =='r') {
-                        board[i2][i3] = new Rook(true, this);
-                        return " White pawn promoted to Rook";
                     }else if(c == 'n') {
                         board[i2][i3] = new Knight(true, this);
                         return " White pawn promoted to Knight";
@@ -73,9 +70,6 @@ public class ChessBoard {
                     }else if(c == 'b') {
                         board[i2][i3] = new Bishop(false, this);
                         return " White pawn promoted to Bishop";
-                    }else if(c =='r') {
-                        board[i2][i3] = new Rook(false, this);
-                        return " White pawn promoted to Rook";
                     }else if(c =='r') {
                         board[i2][i3] = new Rook(false, this);
                         return " White pawn promoted to Rook";

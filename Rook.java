@@ -45,7 +45,6 @@ public class Rook extends ChessPiece {
             if(fromX<toX){//오른쪽으로 이동
                 for(int i=fromX+1;i<toX;i++){//이동 경로에 장애물이 있는지 확인
                     if(ChessBoard.board[i][fromY]!=null){
-                        flag=true;
                         str="there is a piece in the way";
                         flag=true;
                         break;
@@ -54,7 +53,6 @@ public class Rook extends ChessPiece {
             }else{//왼쪽으로 이동
                 for(int i=fromX-1;i>toX;i--){//이동 경로에 장애물이 있는지 확인
                     if(ChessBoard.board[i][fromY]!=null){
-                        flag=true;
                         str="there is a piece in the way";
                         flag=true;
                         break;
@@ -68,8 +66,10 @@ public class Rook extends ChessPiece {
         if(flag==false){//이동 경로에 장애물이 없을 때
             if(ChessBoard.board[toX][toY]==null){//이동하려는 위치에 기물이 없는 경우
                 str="move";
+                isFirstMove=false;
             }else if(ChessBoard.board[toX][toY].isWhite!=this.isWhite){//이동하려는 위치에 기물이 있는 경우
                 str="eat";
+                isFirstMove=false;
             }else if(ChessBoard.board[toX][toY].isWhite==this.isWhite){//이동하려는 위치에 기물이 있는 경우
                 str="cannot move to the same color";
             }

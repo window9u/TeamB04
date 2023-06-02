@@ -21,53 +21,71 @@ public class King extends ChessPiece{
         String str = "";
         ChessPiece countpart = ChessBoard.board[toX][toY];
         if (fromY + 1 == toY && fromX == toX) {//위로 한칸 이동
-            if (countpart == null)//기물이 없는 경우
+            if (countpart == null){
                 str = "move";
-            else if (countpart.isWhite == this.isWhite) {
+                isFirstMove=false;
+                //기물이 없는 경우
+            } else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
                 str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
+                isFirstMove=false;
                 str = "eat";
             }
         } else if (fromY - 1 == toY && fromX == toX) {//아래로 한칸 이동
-            if (countpart == null)//기물이 없는 경우
+            if (countpart == null){//기물이 없는 경우
                 str = "move";
+                isFirstMove=false;
+            }
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
                 str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
+                isFirstMove=false;
                 str = "eat";
             }
         } else if (fromX - 1 == toX && fromY == toY) {//좌로 한칸 이동
-            if (countpart == null)//기물이 없는 경우
+            if (countpart == null){
+                //기물이 없는 경우
                 str = "move";
+                isFirstMove=false;
+            }
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
                 str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
+                isFirstMove=false;
                 str = "eat";
             }
         } else if (fromX + 1 == toX && fromY == toY) {//우로 한칸 이동
-            if (countpart == null)//기물이 없는 경우
+            if (countpart == null){
                 str = "move";
+                isFirstMove=false;
+                //기물이 없는 경우
+            }
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
                 str = "You can't move to the same color";
             } else {
                 //상대방이 있는 경우
+                isFirstMove=false;
                 str = "eat";
             }
         } else if ((fromX + 1 == toX || fromX - 1 == toX) && (fromY + 1 == toY || fromY - 1 == toY)) {//대각선 이동
-            if (countpart == null)//기물이 없는 경우
+            if (countpart == null){
                 str = "move";
+                isFirstMove=false;
+                //기물이 없는 경우
+            }
             else if (countpart.isWhite == this.isWhite) {
                 //같은 색의 기물인 경우
                 str = "cannot move to the same color";
             } else {
                 //상대방이 있는 경우
+                isFirstMove=false;
                 str = "eat";
             }
         }else{
