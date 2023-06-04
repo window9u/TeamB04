@@ -150,15 +150,17 @@ public class Pawn extends ChessPiece{
 
     public boolean canAP(int toX, int toY) {
         if (ChessBoard.game.apFlag > -1){
-            if (ChessBoard.apY == 4) {
+            if (ChessBoard.apY == 4) {//흑 앙파상(흑 점수 +1)
                 if ((toX == ChessBoard.apX) && (toY == ChessBoard.apY - 1)) {
                     ChessBoard.board[ChessBoard.apX][ChessBoard.apY] = null;
+                    ChessBoard.game.BlackScore++;
                     return true;
                 }
             }
-            if (ChessBoard.apY == 5) {
+            if (ChessBoard.apY == 5) {//백 앙파상(백 점수 +1)
                 if ((toX == ChessBoard.apX) && (toY == ChessBoard.apY + 1)) {
                     ChessBoard.board[ChessBoard.apX][ChessBoard.apY] = null;
+                    ChessBoard.game.WhiteScore++;
                     return true;
                 }
             }
