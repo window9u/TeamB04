@@ -37,6 +37,9 @@ public class Pawn extends ChessPiece{
                             //상대방이 없는 경우
                             firstMove=false;
                             str= "move";
+                            ChessBoard.apX = toX;
+                            ChessBoard.apY = toY;
+                            ChessBoard.game.apFlag = 1;
                         }else {//같은편 말이 있는 경우
                             str= "there is a piece in the way";
                         }
@@ -50,6 +53,11 @@ public class Pawn extends ChessPiece{
                 if(countpart==null){
                     //상대방이 없는 경우
                     str= "invalid move";
+
+                    //앙파상
+                    if (canAP(toX, toY)) { str = "move"; }
+
+
                 }else if(countpart.isWhite!=this.isWhite){
                     //상대방이 있는 경우
                     firstMove=false;
@@ -83,6 +91,9 @@ public class Pawn extends ChessPiece{
                             //상대방이 없는 경우
                             firstMove=false;
                             str= "move";
+                            ChessBoard.apX = toX; //앙파상 좌표 설정
+                            ChessBoard.apY = toY;
+                            ChessBoard.game.apFlag = 1;
                         }else {//같은편 말이 있는 경우
                             str= "there is a piece in the way";
                         }
@@ -96,6 +107,10 @@ public class Pawn extends ChessPiece{
                 if(countpart==null){
                     //상대방이 없는 경우
                     str= "invalid move";
+
+                    //앙파상
+                    if (canAP(toX, toY)) { str = "move"; }
+
                 }else if(countpart.isWhite!=this.isWhite){
                     //상대방이 있는 경우
                     firstMove=false;
@@ -131,6 +146,24 @@ public class Pawn extends ChessPiece{
         }else {
             return "p";
         }
+    }
+
+    public boolean canAP(int toX, int toY) {
+        if (ChessBoard.game.apFlag > -1){
+            if (ChessBoard.apY == 4) {
+                if ((toX == ChessBoard.apX) && (toY == ChessBoard.apY - 1)) {
+                    ChessBoard.board[ChessBoard.apX][ChessBoard.apY] = null;
+                    return true;
+                }
+            }
+            if (ChessBoard.apY == 5) {
+                if ((toX == ChessBoard.apX) && (toY == ChessBoard.apY + 1)) {
+                    ChessBoard.board[ChessBoard.apX][ChessBoard.apY] = null;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

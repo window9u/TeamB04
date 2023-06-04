@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 public class ChessBoard {
-    private ChessGame game;
+    public ChessGame game;
     //9,9로 한 이유는 코딩할 때 0을 햇갈리지 않도록.
     ChessPiece[][] board = new ChessPiece[9][9];
+    int apX = -1, apY = -1;
 
     public ChessBoard(ChessGame game) {
         this.game = game;

@@ -13,6 +13,7 @@ public class ChessGame {
     //-1: 긴급종료
     //0: 기물을 다시 선택하는 경우
     boolean castlingFlag = false;
+    int apFlag = -1;
     int WhiteKingX, WhiteKingY, BlackKingX, BlackKingY;// 킹의 위치
     //isKingDie()에서 위치 동기화해줌.
     Scanner scan = new Scanner(System.in);
@@ -55,6 +56,15 @@ public class ChessGame {
                 }else {
                     printMessage = "Black Castling\n";
                 }
+
+                if (apFlag > -1){
+                    if (apFlag == 0){
+                        Chessboard.apX = -1;
+                        Chessboard.apY = -1;
+                    }
+                    apFlag--;
+                }
+
             }else{// 캐슬링이 아닌 경우
                 inputTo(isWhiteTurn);
                 if (escapeFlag == 0) {// 기물을 다시 선택하는 경우
@@ -70,6 +80,15 @@ public class ChessGame {
                 }
                 // 이동
                 printMessage = Chessboard.Move(fromX, fromY, toX, toY);
+
+                if (apFlag > 0){
+                    if (apFlag == 0){
+                        Chessboard.apX = -1;
+                        Chessboard.apY = -1;
+                    }
+                    apFlag--;
+                }
+
             }
 
             // 턴 바꾸기
