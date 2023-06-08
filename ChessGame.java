@@ -399,7 +399,7 @@ public class ChessGame {
                     }
                 }
                 if((Chessboard.board[8][1] instanceof Rook)&&(Chessboard.board[5][1] instanceof King)){ //H1과 E1이 룩과 킹 인지 확인
-                    Rook r=(Rook) Chessboard.board[1][1];
+                    Rook r=(Rook) Chessboard.board[8][1];
                     King k=(King) Chessboard.board[5][1];
                     if(r.isFirstMove&&k.isFirstMove){
                         //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
@@ -454,7 +454,7 @@ public class ChessGame {
                     }
                 }
                 if((Chessboard.board[8][8] instanceof Rook)&&(Chessboard.board[5][8] instanceof King)){ //H1과 E1이 룩과 킹 인지 확인
-                    Rook r=(Rook) Chessboard.board[1][8];
+                    Rook r=(Rook) Chessboard.board[8][8];
                     King k=(King) Chessboard.board[5][8];
                     if(r.isFirstMove&&k.isFirstMove){
                         //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
