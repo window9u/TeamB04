@@ -258,12 +258,24 @@ public class ChessGame {
 
         this.Chessboard = new ChessBoard(this);
 
-        for(int i=1;i<9;i++){
+        /*for(int i=1;i<9;i++){
             Chessboard.board[i][2] = new Pawn(true, this.Chessboard);
         }
         for(int i=1;i<9;i++){
             Chessboard.board[i][7] = new Pawn(false, this.Chessboard);
-        }
+        }*/
+
+
+        Chessboard.board[1][7] = new Pawn(false, this.Chessboard);
+        Chessboard.board[2][7] = new Pawn(false, this.Chessboard);
+        Chessboard.board[7][7] = new Pawn(false, this.Chessboard);
+        Chessboard.board[8][7] = new Pawn(false, this.Chessboard);
+
+        Chessboard.board[1][2] = new Pawn(true, this.Chessboard);
+        Chessboard.board[2][2] = new Pawn(true, this.Chessboard);
+        Chessboard.board[7][2] = new Pawn(true, this.Chessboard);
+        Chessboard.board[8][2] = new Pawn(true, this.Chessboard);
+
 
         Chessboard.board[1][1] = new Rook(true, this.Chessboard);
         Chessboard.board[8][1] = new Rook(true, this.Chessboard);
@@ -399,7 +411,7 @@ public class ChessGame {
                     }
                 }
                 if((Chessboard.board[8][1] instanceof Rook)&&(Chessboard.board[5][1] instanceof King)){ //H1과 E1이 룩과 킹 인지 확인
-                    Rook r=(Rook) Chessboard.board[1][1];
+                    Rook r=(Rook) Chessboard.board[8][1];
                     King k=(King) Chessboard.board[5][1];
                     if(r.isFirstMove&&k.isFirstMove){
                         //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
@@ -454,7 +466,7 @@ public class ChessGame {
                     }
                 }
                 if((Chessboard.board[8][8] instanceof Rook)&&(Chessboard.board[5][8] instanceof King)){ //H1과 E1이 룩과 킹 인지 확인
-                    Rook r=(Rook) Chessboard.board[1][8];
+                    Rook r=(Rook) Chessboard.board[8][8];
                     King k=(King) Chessboard.board[5][8];
                     if(r.isFirstMove&&k.isFirstMove){
                         //룩과 킹이 모두 움직인 적이 없다면isfirstmove false로
