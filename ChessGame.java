@@ -57,14 +57,6 @@ public class ChessGame {
                     printMessage = "Black Castling\n";
                 }
 
-                if (apFlag > -1){
-                    if (apFlag == 0){
-                        Chessboard.apX = -1;
-                        Chessboard.apY = -1;
-                    }
-                    apFlag--;
-                }
-
             }else{// 캐슬링이 아닌 경우
                 inputTo(isWhiteTurn);
                 if (escapeFlag == 0) {// 기물을 다시 선택하는 경우
@@ -80,15 +72,14 @@ public class ChessGame {
                 }
                 // 이동
                 printMessage = Chessboard.Move(fromX, fromY, toX, toY);
+            }
 
-                if (apFlag > 0){
-                    if (apFlag == 0){
-                        Chessboard.apX = -1;
-                        Chessboard.apY = -1;
-                    }
-                    apFlag--;
+            if (apFlag > -1){
+                if (apFlag == 0){
+                    Chessboard.apX = -1;
+                    Chessboard.apY = -1;
                 }
-
+                apFlag--;
             }
 
             // 턴 바꾸기
