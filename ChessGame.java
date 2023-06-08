@@ -258,24 +258,12 @@ public class ChessGame {
 
         this.Chessboard = new ChessBoard(this);
 
-        /*for(int i=1;i<9;i++){
+        for(int i=1;i<9;i++){
             Chessboard.board[i][2] = new Pawn(true, this.Chessboard);
         }
         for(int i=1;i<9;i++){
             Chessboard.board[i][7] = new Pawn(false, this.Chessboard);
-        }*/
-
-
-        Chessboard.board[1][7] = new Pawn(false, this.Chessboard);
-        Chessboard.board[2][7] = new Pawn(false, this.Chessboard);
-        Chessboard.board[7][7] = new Pawn(false, this.Chessboard);
-        Chessboard.board[8][7] = new Pawn(false, this.Chessboard);
-
-        Chessboard.board[1][2] = new Pawn(true, this.Chessboard);
-        Chessboard.board[2][2] = new Pawn(true, this.Chessboard);
-        Chessboard.board[7][2] = new Pawn(true, this.Chessboard);
-        Chessboard.board[8][2] = new Pawn(true, this.Chessboard);
-
+        }
 
         Chessboard.board[1][1] = new Rook(true, this.Chessboard);
         Chessboard.board[8][1] = new Rook(true, this.Chessboard);
